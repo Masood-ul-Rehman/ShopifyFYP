@@ -10,12 +10,11 @@ const createBusiness = async (req, res) => {
       name: req.body.name,
       type: req.body.type,
     });
-    // if (req.file) {
-    //   newBusiness.image = {
-    //     data: req.file.buffer,
-    //     contentType: req.file.mimetype,
-    //   };
-    // }
+    if (req.file) {
+      newBusiness.image = {
+        data: req.file.filename,
+      };
+    }
     // save the new business object to the database
     const savedBusiness = await newBusiness.save();
 

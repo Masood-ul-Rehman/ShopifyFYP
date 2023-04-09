@@ -14,10 +14,10 @@ const businessSchema = mongoose.Schema(
       type: String,
       required: [true, "Business type"],
     },
-    // image: {
-    //   data: Buffer,
-    //   contentType: String,
-    // },
+    image: {
+      data: Buffer,
+      contentType: String,
+    },
   },
   {
     timestamps: true,
