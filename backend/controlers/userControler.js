@@ -39,11 +39,14 @@ const registerUser = asyncHandler(async (req, res) => {
 //@desc  loginUser
 //@route POST /api/users/login
 //@access Public
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
+
   if (user) {
     if (await bcrypt.compare(password, user.password)) {
+      // req.session.asf = true;
       res.status(201).json({
         _id: user.id,
         name: user.name,
@@ -56,6 +59,7 @@ const loginUser = asyncHandler(async (req, res) => {
   } else {
     res.status(400).json({ message: "Invalid email" });
   }
+  console.log(req.session.isLoggedIn);
   res.json({ mesage: "login" });
 });
 

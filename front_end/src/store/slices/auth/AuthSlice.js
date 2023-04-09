@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { login, logout, register } from "../thunks/authThunk";
+import { login, logout, register } from "../../thunks/authThunk";
 const user = JSON.parse(localStorage.getItem("user"));
 
 const AuthSlice = createSlice({
@@ -55,6 +55,6 @@ const AuthSlice = createSlice({
       });
   },
 });
-export * from "../thunks/authThunk";
+export * from "../../thunks/authThunk";
 export const { reset } = AuthSlice.actions;
 export const authSlice = AuthSlice.reducer;

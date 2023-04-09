@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -11,6 +11,9 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
+      <Link to={"/create"}>
+        <button>Create a website</button>
+      </Link>
     </div>
   );
 };
