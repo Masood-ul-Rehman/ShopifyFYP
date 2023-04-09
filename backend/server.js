@@ -1,11 +1,13 @@
 const express = require("express");
 const dotenv = require("dotenv").config();
-const multer = require("multer");
+
 const connectDB = require("./config/db");
 const { errorHandler } = require("./middleware/erroemiddleware");
+var bodyParser = require("body-parser");
 
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
+
 connectDB();
 
 const app = express();
@@ -15,11 +17,12 @@ const app = express();
 // });
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 // app.use(multer({ storage: fileStorage }).single("image"));
 
 app.use("/api/users", require("./routes/userRoutes"));
-app.use("/api/details", require("./routes/detailsRoutes"));
+app.use("/api/create", require("./routes/detailsRoutes"));
 // app.use(
 //   session({
 //     secret: "my secret",

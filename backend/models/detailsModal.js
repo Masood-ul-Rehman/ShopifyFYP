@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const businessSchema = mongoose.Schema(
   {
-    user: {
+    User: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "User",
+      ref: "user",
     },
     name: {
       type: String,

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Createnew } from "../../thunks/CreateWebsiteThunk/CreateThunk";
+import { NewWebsiteThunk } from "../../thunks/CreateWebsiteThunk/CreateThunk";
 const WebsiteSlice = createSlice({
   name: "createWebsite",
   initialState: {
@@ -11,14 +11,14 @@ const WebsiteSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(Createnew.pending, (state) => {
+      .addCase(NewWebsiteThunk.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(Createnew.fulfilled, (state, action) => {
+      .addCase(NewWebsiteThunk.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = true;
       })
-      .addCase(Createnew.rejected, (state, action) => {
+      .addCase(NewWebsiteThunk.rejected, (state, action) => {
         state.isError = true;
         state.isLoading = false;
         state.isMessage = action.payload;

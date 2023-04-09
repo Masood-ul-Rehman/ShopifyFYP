@@ -1,62 +1,31 @@
 const asyncHandler = require("express-async-handler");
-// const details = asyncHandler(async (req, res) => {
-//   const { name, type, logo } = req.body;
-//   if (!name || !type || !logo) {
-//     res.status(400);
-//     throw new Error("Please add all fields");
-//   }
-//   const user = await Bdetails.create({
-//     name,
-//     type,
-//     logo,
-//   });
-// });
+
 const Details = require("../models/detailsModal");
-const uploadImage = require("../middleware/upload");
 
-const uploadDetails = asyncHandler(async (req, res) => {
-  // Details.name = req.body.name;
-  // Details.type = req.body.type;
-  const { name, type } = req.body;
-  // details.image.data = req.file.buffer;
-  // details.image.contentType = req.file.mimetype;
-  const create = await Details.create({
-    name,
-    type,
-  });
-  if (create) {
-    res.status(201).json({
-      _id: create.id,
-      name: create.name,
-      bustype: create.type,
+const createBusiness = async (req, res) => {
+  try {
+    // create a new business object using the request body
+    const newBusiness = new Details({
+      User: req.body.User,
+      name: req.body.name,
+      type: req.body.type,
     });
-  } else {
-    res.status(400).json({ message: " not found" });
+    // if (req.file) {
+    //   newBusiness.image = {
+    //     data: req.file.buffer,
+    //     contentType: req.file.mimetype,
+    //   };
+    // }
+    // save the new business object to the database
+    const savedBusiness = await newBusiness.save();
+
+    // return a success response to the client
+    return res.status(201).json({ success: true, data: savedBusiness });
+  } catch (error) {
+    // if there is an error, return an error response to the client
+    console.error(error);
+    return res.status(500).json({ success: false, error: error.message });
   }
-});
-//   details.save((err) => {
-//     // if (err) {
-//     //   console.log(err);
-//     //   res.sendStatus(500);
-//     // } else {
-//     //   res.sendStatus(200);
-//     // }
-//     res.status(400).json({ message: "user not found" });
-//   });
-// };
+};
 
-// const getDetailsImage = (req, res) => {
-//   Details.findOne({}, (err, details) => {
-//     if (err) {
-//       console.log(err);
-//       res.sendStatus(500);
-//     } else if (!details) {
-//       res.sendStatus(404);
-//     } else {
-//       res.contentType(details.image.contentType);
-//       res.send(details.image.data);
-//     }
-//   });
-// };
-
-module.exports = { uploadDetails };
+module.exports = { createBusiness };

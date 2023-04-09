@@ -1,31 +1,46 @@
-// const storage = multer.memoryStorage();
-
-// const uploadImage = upload.single('image');
-
-// const fileStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "images");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, new Date().toISOString() + "-" + file.originalname);
-//   },
-// });
-// const upload = multer({ storage: fileStorage });
-
-// upload.single("image");
-// module.exports = uploadImage;
-
 const multer = require("multer");
+const util = require("util");
 
+// configure multer storage and file filter
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/");
+  destination: (req, file, cb) => {
+    cb(null, "public/images"); // specify the directory where you want to save the image
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname); // generate a unique filename for the image
   },
 });
+let uploadFile = multer({
+  storage: storage,
+  // limits: { fileSize: maxSize },
+}).single("image");
 
-const upload = multer({ storage: storage });
+const upload = async (req, res) => {
+  try {
+    await uploadFile(req, res);
 
-module.exports = upload;
+    if (req.file == undefined) {
+      return res.status(400).send({ message: "Please upload a file!" });
+    }
+
+    res.status(200).send({
+      message: "Uploaded the file successfully: ",
+    });
+  } catch (err) {
+    res.status(500).send({
+      message: `Could not upload the file: `,
+    });
+  }
+};
+
+module.exports = {
+  upload,
+};
+// const fileFilter = (req, file, cb) => {
+//   if (file.mimetype.startsWith("image/")) {
+//     cb(null, true);
+//   } else {
+//     cb(new Error("File type not supported"), false);
+//   }
+// };
+// const upload = multer({ storage, fileFilter });

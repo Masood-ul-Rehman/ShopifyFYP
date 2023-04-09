@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authSlice } from "./slices/auth/AuthSlice";
-import { websiteSlice } from "./slices/CreateWebsite/createSlice";
+import { websiteSlice } from "./slices/CreateWebsite/newWebsiteSlice";
 export const store = configureStore({
   reducer: {
     auth: authSlice,
@@ -8,4 +8,4 @@ export const store = configureStore({
   },
 });
 export * from "./slices/auth/AuthSlice";
-export * from "./slices/CreateWebsite/createSlice";
+export * from "./slices/CreateWebsite/newWebsiteSlice";

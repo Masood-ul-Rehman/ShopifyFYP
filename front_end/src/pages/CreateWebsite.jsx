@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { NewWebsiteThunk } from "../store/index";
 const CreateWebsite = () => {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
     bustype: "",
@@ -14,13 +15,23 @@ const CreateWebsite = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const userData = {
+      name,
+      bustype,
+    };
+
+    dispatch(NewWebsiteThunk(userData));
+  };
   return (
-    <div className="flex">
+    <form onSubmit={onSubmit}>
       <input
         type="name"
         className="form-control"
         id="name"
-        name="websiteName"
+        name="name"
         value={name}
         placeholder="Enter your bussiness name"
         onChange={onChange}
@@ -28,14 +39,14 @@ const CreateWebsite = () => {
       <input
         type="name"
         className="form-control"
-        id="busType"
-        name="bussinesstype"
+        id="bustype"
+        name="bustype"
         value={bustype}
         placeholder="Enter your Bussiness type"
         onChange={onChange}
       />
-      <button>Continue</button>
-    </div>
+      <button type="submit">Continue</button>
+    </form>
   );
 };
 export default CreateWebsite;

@@ -1,10 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {
-  uploadDetails,
-  // getDetailsImage,
-} = require("../controlers/detailsControler");
+const { createBusiness } = require("../controlers/detailsControler");
 
-router.post("/s", uploadDetails);
-// router.get("/details", getDetailsImage);
+router.post("/newWebsite", createBusiness);
 module.exports = router;
