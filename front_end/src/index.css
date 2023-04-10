@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.grad-img{
+    background-image: url('./assets/bgs/bg-effect-hero.svg'), radial-gradient(circle at 3%,#6F52EC 0%, #240D91);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    background-size: auto;
+}
+
+.grad{
+   background-image: radial-gradient(circle at 3%,#6F52EC 0%, #240D91);
+}
+
+
+/* remember me option  */
+.form-checkbox:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(164, 202, 254, 0.45);
+}
+
+.checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    opacity: 0;
+    z-index: 99;
+}
+.checkbox label::before {
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 2px;
+    border: 1px solid rgb(209 213 219);
+    cursor: pointer;
+    position: absolute;
+    top: 2px;
+    left: 0;
+}
+
+.checkbox  input[type="checkbox"]:checked + label::before {
+    content: "\2713";
+    background-color: #240D91;
+    border-radius: 2px;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
