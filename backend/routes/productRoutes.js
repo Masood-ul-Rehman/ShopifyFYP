@@ -1,9 +1,11 @@
 const express = require("express");
-const router = express.Router();
-const { createBusiness } = require("../controlers/detailsControler");
+
+const { addProduct } = require("../controlers/productControler");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 const { protect } = require("../middleware/authmiddleware");
+const router = express.Router();
 
-router.post("/newWebsite", protect, upload.single("image"), createBusiness);
+router.post("/addProduct", protect, upload.single("image"), addProduct);
+
 module.exports = router;
