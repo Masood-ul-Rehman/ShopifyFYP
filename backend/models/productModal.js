@@ -42,6 +42,13 @@ const productSchema = mongoose.Schema(
       data: Buffer,
       contentType: String,
     },
+    ratings: [
+      {
+        star: Number,
+        comment: String,
+        postedby: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      },
+    ],
   },
   {
     timestamps: true,
