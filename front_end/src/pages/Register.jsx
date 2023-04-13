@@ -215,7 +215,7 @@ function Register() {
 
             <div className="mt-12">
               <Button styles={"m-auto px-12"} primaryGrad type={"submit"}>
-                Login
+                Register
               </Button>
             </div>
           </form>

@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import ResetPassword from "./pages/ResetPassword";
 import CreateWebsite from "./pages/CreateWebsite";
+import "./index.css";
 
 function App() {
 
