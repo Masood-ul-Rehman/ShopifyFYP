@@ -5,6 +5,9 @@ import { toast } from "react-toastify";
 import { FaUser } from "react-icons/fa";
 import { reset } from "../store/index";
 import { register } from "../store/thunks/authThunk";
+import Loader from "../components/Loader/Loader";
+import Button from "../components/Button";
+
 function Register() {
   const [formData, setFormData] = useState({
     name: "",
@@ -59,15 +62,14 @@ function Register() {
 
   if (isLoading) {
     return (
-      <div>
-        <h2>Loading............</h2>
-      </div>
+      <Loader />
+      // <h1>Loading....</h1>
     );
   }
 
   return (
     <>
-      <section className="heading">
+      {/* <section className="heading">
         <h1>
           <FaUser /> Register
         </h1>
@@ -126,7 +128,99 @@ function Register() {
             </button>
           </div>
         </form>
-      </section>
+      </section> */}
+
+      <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="mt-12 sm:mx-auto w-full sm:max-w-xl">
+          <div className="bg-white pt-12 pb-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <h3 className="text-center font-poppins text-neutral-800 text-4xl">
+              Register
+            </h3>
+          </div>
+          <form
+            onSubmit={onSubmit}
+            noValidate
+            className="bg-white py-12 px-4 shadow sm:rounded-lg sm:px-10"
+          >
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-4 text-neutral-800"
+              >
+                Full name
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={name}
+                placeholder="Enter your name"
+                onChange={onChange}
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-full shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-purplish transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+              />
+            </div>
+            <div className="mt-8">
+              <label
+                htmlFor="email"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-4 text-neutral-800"
+              >
+                Email
+              </label>
+              <input
+                type="eamil"
+                id="email"
+                name="email"
+                value={email}
+                placeholder="example@gmail.com"
+                onChange={onChange}
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-full shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-purplish transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+              />
+            </div>
+
+            <div className="mt-8">
+              <label
+                htmlFor="password"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-4 text-neutral-800"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                placeholder="Enter stron password"
+                onChange={onChange}
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-full shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-purplish transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+              />
+            </div>
+
+            <div className="mt-8">
+              <label
+                htmlFor="password2"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-4 text-neutral-800"
+              >
+                Confirm Password
+              </label>
+              <input
+                type="password"
+                id="password2"
+                name="password2"
+                value={password2}
+                placeholder="Confirm password"
+                onChange={onChange}
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-full shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-purplish transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+              />
+            </div>
+
+            <div className="mt-12">
+              <Button styles={"m-auto px-12"} primaryGrad type={"submit"}>
+                Login
+              </Button>
+            </div>
+          </form>
+        </div>
+      </div>
     </>
   );
 }

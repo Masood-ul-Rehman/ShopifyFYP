@@ -5,23 +5,33 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Header from "./components/Header";
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
+import ResetPassword from "./pages/ResetPassword";
 import CreateWebsite from "./pages/CreateWebsite";
+
 function App() {
+
   return (
     <div>
       <Router>
-        <div className="container">
+        <div className="main-content">
           <Header />
           <Routes>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/create" element={<CreateWebsite />} />
           </Routes>
+          <Footer />
         </div>
       </Router>
       <ToastContainer />
     </div>
+
+    // <Loader />
   );
 }
 
