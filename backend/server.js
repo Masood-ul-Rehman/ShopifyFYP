@@ -24,6 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/create", require("./routes/detailsRoutes"));
 app.use("/api/product", require("./routes/productRoutes"));
+app.use("/api/complete", require("./routes/completeSetupRoutes"));
 
 // app.use(
 //   session({
