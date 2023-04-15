@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon backend/server.js",
     "server": "nodemon backend/server.js --ignore client",
-    "client": "npm start --prefix front_end",
+    "client": "npm start",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Masood ul Rehman",
