@@ -19,21 +19,12 @@ const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(multer({ storage: fileStorage }).single("image"));
 
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/create", require("./routes/detailsRoutes"));
 app.use("/api/product", require("./routes/productRoutes"));
 app.use("/api/complete", require("./routes/completeSetupRoutes"));
 
-// app.use(
-//   session({
-//     secret: "my secret",
-//     resave: false,
-//     saveUninitialized: false,
-//     store: Sessionstore,
-//   })
-// );
 // Serve frontend
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));

@@ -10,7 +10,14 @@ const templateSchema = mongoose.Schema(
       type: String,
       required: [true, "Please chose the theme"],
     },
+    user_id: {
+      type: String,
+    },
+    websiteLocation: {
+      type: String,
+    },
   },
+
   {
     timestamps: true,
   }
