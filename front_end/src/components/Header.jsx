@@ -5,6 +5,7 @@ import { logout, reset } from "../store";
 import { useSelector, useDispatch } from "react-redux";
 import Button from "./Button";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function Header() {
   const navigate = useNavigate();
@@ -51,7 +52,7 @@ function Header() {
                   <NavLink to="/">Home</NavLink>
                 </li>
                 <li className="px-6 py-2 cursor-pointer  font-poppins font-light text-base text-white">
-                  <NavLink to="/dashboard">Dashboard</NavLink>
+                  <NavLink to="/login" onClick={() => {toast.error("Please login to access this page!");}}>Dashboard</NavLink>
                 </li>
                 <li className="px-6 py-2 cursor-pointer font-poppins font-light text-base">
                   <NavLink to="/login">
