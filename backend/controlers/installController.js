@@ -87,7 +87,7 @@ const start = asyncHandler(async (req, res) => {
     id
   )} && npm start `;
 
-  const start = spawn(command2, [], { timeout: 10000 });
+  const start = spawn(command2, [], { shell: true, timeout: 10000 });
   start.stdout.on("data", (data) => {
     console.log(`stdout: ${data}`);
   });
