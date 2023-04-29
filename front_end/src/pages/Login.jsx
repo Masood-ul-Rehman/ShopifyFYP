@@ -29,7 +29,7 @@ function Login() {
     }
 
     if (isSuccess || user) {
-      navigate("/dashboard");
+      navigate("/createstore");
     }
 
     dispatch(reset());
@@ -53,10 +53,10 @@ function Login() {
     dispatch(login(userData));
   };
 
-  const [checkboxValue, setCheckboxValue] = useState(false);
-  const handleCheckboxChange = (event) => {
-    setCheckboxValue(event.target.checked);
-  };
+  // const [checkboxValue, setCheckboxValue] = useState(false);
+  // const handleCheckboxChange = (event) => {
+  //   setCheckboxValue(event.target.checked);
+  // };
 
   if (isLoading) {
     return (
@@ -155,7 +155,7 @@ function Login() {
             </div>
 
             <div className="mt-6 mx-4 flex items-center justify-between">
-              <div className="">
+              {/* <div className="">
                 <label className="relative flex items-center mt-2">
                   <div className="checkbox flex items-center h-5">
                     <input
@@ -171,12 +171,23 @@ function Login() {
                     <span>Remember me</span>
                   </div>
                 </label>
+              </div> */}
+
+              <div className="text-base leading-5">
+                <p className="font-poppins text-sm font-light text-neutral-800">
+                  Not have an accont?{" "}
+                  <Link to={"/register"}>
+                    <span className="text-purplish font-medium hover:text-opacity-80 transition ease-in-out duration-150">
+                      Register
+                    </span>
+                  </Link>{" "}
+                </p>
               </div>
 
               <div className="text-base leading-5">
                 <Link
                   to="/resetpassword"
-                  className="font-poppins font-medium text-purplish focus:outline-none focus:underline transition ease-in-out duration-150"
+                  className="font-poppins font-medium text-purplish hover:text-opacity-80 transition ease-in-out duration-150"
                 >
                   Forget Password?
                 </Link>
@@ -188,8 +199,6 @@ function Login() {
                 Login
               </Button>
             </div>
-
-            
           </form>
         </div>
       </div>

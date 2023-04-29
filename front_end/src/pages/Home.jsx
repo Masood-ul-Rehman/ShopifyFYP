@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { SiStorybook } from "react-icons/si";
 import Button from "../components/Button";
 import heroImg from "../assets/images/image-editor.svg";
@@ -16,9 +17,11 @@ function Home() {
           <p className="text-base md:text-lg font-light px-2 sm:px-6 leading-tight text-center mt-6">
             Build Faster secure and faster website for you without using coding
           </p>
-          <Button styles="mt-8 mx-auto" primaryPlain>
-            Register Now
-          </Button>
+          <Link to="/register">
+            <Button styles="mt-8 mx-auto" primaryPlain>
+              Register Now
+            </Button>
+          </Link>
         </div>
       </div>
 
