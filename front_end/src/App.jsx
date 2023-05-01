@@ -15,6 +15,7 @@ import ResetPassword from "./pages/ResetPassword";
 import CreateWebsite from "./pages/CreateWebsite";
 import Layout from "./components/logedinuser/Layout";
 import Dashboradd from "./pages/dashboard/Dashboradd";
+import Products from "./pages/dashboard/products/Products";
 import "./index.css";
 
 // react redux
@@ -28,28 +29,44 @@ function App() {
     <div>
       <Router>
       <div className="main-content">
-        {
+        {/* {
           // need this to do in better way
-          !user ? (
+          user ? (
             <Header />
           ) : (
             <Routes>
               <Route path="/dashboard" element={<Layout />}>
                 <Route index element={<Dashboradd />} />
-                {/* <Route path="products" element={<Products />} /> */}
+                <Route path="products" element={<Products />} />
               </Route>
             </Routes>
           )
-        }
+        } */}
+
+          <Header />
+        
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/resetpassword" element={<ResetPassword />} />
-          <Route path="/createstore" element={<Createnewstore />} />
-          <Route path="/create" element={<CreateWebsite />} />
+          {/* <Route path="/resetpassword" element={<ResetPassword />} /> */}
+          {/* <Route path="/createstore" element={<Createnewstore />} /> */}
+          {/* <Route path="/create" element={<CreateWebsite />} /> */}
         </Routes>
-        {!user ? (
+
+        {user && (
+          <Routes>
+            <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/createstore" element={<Createnewstore />} />
+            <Route path="/create" element={<CreateWebsite />} />
+            <Route path="/dashboard" element={<Layout />}>
+              <Route index element={<Dashboradd />} />
+              <Route path="products" element={<Products />} />
+            </Route>
+          </Routes>
+        )}
+
+        {user ? (
           <Footer />
         ) : null}
       </div>
