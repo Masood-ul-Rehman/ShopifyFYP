@@ -23,6 +23,7 @@ const registerUser = asyncHandler(async (req, res) => {
     name,
     email,
     password: hashedpass,
+    isNew: true,
   });
   if (user) {
     res.status(201).json({
