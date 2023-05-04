@@ -6,6 +6,11 @@ function Button({
   secondaryPlain,
   primaryGrad,
   secondaryGrad,
+  semiRounded,
+  danger,
+  encourage,
+  addition,
+  simpleBlack,
   type,
   ...rest
 }) {
@@ -20,6 +25,19 @@ function Button({
         secondaryPlain,
       "text-white bg-purplish border-purplish hover:text-neutral-800 hover:bg-transparent":
         primaryGrad,
+
+      "rounded-md text-white bg-rose-700 border-rose-700 hover:text-neutral-800 hover:bg-transparent":
+        semiRounded && danger,
+
+      "rounded-md text-white bg-amber-500 border-amber-500 hover:text-neutral-800 hover:bg-transparent":
+        semiRounded && encourage,
+
+        "rounded-md text-white bg-green-600 border-green-600 hover:text-neutral-800 hover:bg-transparent":
+        semiRounded && addition,
+
+        "rounded-md text-white bg-neutral-800 border-neutral-800 hover:text-neutral-800 hover:bg-transparent":
+        semiRounded && simpleBlack,
+
     }
   );
 

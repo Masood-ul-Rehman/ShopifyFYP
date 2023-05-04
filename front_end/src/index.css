@@ -22,6 +22,15 @@ body{
   );
 }
 
+input.no-button-increment[type=number] {
+  -moz-appearance: textfield;
+}
+input.no-button-increment::-webkit-outer-spin-button,
+input.no-button-increment::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 /* remember me option  */
 .form-checkbox:focus {
   outline: none;

@@ -20,6 +20,7 @@ import "./index.css";
 
 // react redux
 import { useSelector } from "react-redux";
+import AddProduct from "./pages/dashboard/products/AddProduct";
 
 function App() {
 
@@ -43,8 +44,8 @@ function App() {
           )
         } */}
 
-          <Header />
         
+          {user && <Header />}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -54,7 +55,7 @@ function App() {
           {/* <Route path="/create" element={<CreateWebsite />} /> */}
         </Routes>
 
-        {user && (
+        {!user && (
           <Routes>
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/createstore" element={<Createnewstore />} />
@@ -62,13 +63,12 @@ function App() {
             <Route path="/dashboard" element={<Layout />}>
               <Route index element={<Dashboradd />} />
               <Route path="products" element={<Products />} />
+              <Route path="addproducts" element={<AddProduct />} />
             </Route>
           </Routes>
         )}
 
-        {user ? (
-          <Footer />
-        ) : null}
+        {!user && <Footer />}
       </div>
       </Router>
       <ToastContainer />
