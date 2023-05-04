@@ -1,34 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Carditem from "./Carditem";
-import DATA from "./Data";
+import Order from "../Order";
 import Button from "../../../components/Button";
 
-function Products() {
+function OrderPage() {
   return (
     <div>
       <div className="py-4">
         <div className="row">
           <div className="flex justify-between items-center py-4">
-            <h1 className="font-poppins font-medium text-6xl">Products</h1>
-            <Link to="/dashboard/addproducts">
+            <h1 className="font-poppins font-medium text-6xl">Add Product</h1>
+            <Link to="/dashboard">
               <Button semiRounded simpleBlack>
-                Add New Product
+                Back to dashboard
               </Button>
             </Link>
           </div>
           <hr />
         </div>
       </div>
-      <div>
-        <div className="mt-6">
-          {DATA.map((item) => {
-            return <Carditem key={item.id} detail={item}></Carditem>;
-          })}
-        </div>
+      <div className="mt-4  min-h-screen">
+        <Order />
       </div>
     </div>
   );
 }
 
-export default Products;
+export default OrderPage;

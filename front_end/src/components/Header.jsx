@@ -58,15 +58,6 @@ function Header() {
               )}
 
               <>
-<<<<<<< HEAD
-                <li className="px-6 py-2 cursor-pointer font-poppins font-light text-base text-white">
-                  <NavLink to="/">Home</NavLink>
-                </li>
-                <li className="px-6 py-2 cursor-pointer  font-poppins font-light text-base text-white" onClick={handleErrorClick} >
-                  <NavLink to={!user ? "/dashboard" : "/login"}>Dashboard</NavLink>
-                </li>
-=======
->>>>>>> a7dce4a9e0b3c88c6e37cdf0c65dbd39c29a2eaf
                 <li className="px-6 py-2 cursor-pointer font-poppins font-light text-base">
                   <NavLink to="/login">
                     <Button secondaryPlain>Login</Button>

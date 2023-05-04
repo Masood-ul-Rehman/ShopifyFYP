@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Createnewstore from "./pages/Createnewstore";
@@ -21,16 +17,16 @@ import "./index.css";
 // react redux
 import { useSelector } from "react-redux";
 import AddProduct from "./pages/dashboard/products/AddProduct";
+import OrderPage from "./pages/dashboard/order/OrderPage";
 
 function App() {
-
   const { user } = useSelector((state) => state.auth);
 
   return (
     <div>
       <Router>
-      <div className="main-content">
-        {/* {
+        <div className="main-content">
+          {/* {
           // need this to do in better way
           user ? (
             <Header />
@@ -44,32 +40,32 @@ function App() {
           )
         } */}
 
-        
-          {user && <Header />}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          {/* <Route path="/resetpassword" element={<ResetPassword />} /> */}
-          {/* <Route path="/createstore" element={<Createnewstore />} /> */}
-          {/* <Route path="/create" element={<CreateWebsite />} /> */}
-        </Routes>
-
-        {!user && (
+          {!user && <Header />}
           <Routes>
-            <Route path="/resetpassword" element={<ResetPassword />} />
-            <Route path="/createstore" element={<Createnewstore />} />
-            <Route path="/create" element={<CreateWebsite />} />
-            <Route path="/dashboard" element={<Layout />}>
-              <Route index element={<Dashboradd />} />
-              <Route path="products" element={<Products />} />
-              <Route path="addproducts" element={<AddProduct />} />
-            </Route>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            {/* <Route path="/resetpassword" element={<ResetPassword />} /> */}
+            {/* <Route path="/createstore" element={<Createnewstore />} /> */}
+            {/* <Route path="/create" element={<CreateWebsite />} /> */}
           </Routes>
-        )}
 
-        {!user && <Footer />}
-      </div>
+          {user && (
+            <Routes>
+              <Route path="/resetpassword" element={<ResetPassword />} />
+              <Route path="/createstore" element={<Createnewstore />} />
+              <Route path="/create" element={<CreateWebsite />} />
+              <Route path="/dashboard" element={<Layout />}>
+                <Route index element={<Dashboradd />} />
+                <Route path="products" element={<Products />} />
+                <Route path="addproducts" element={<AddProduct />} />
+                <Route path="orders" element={<OrderPage />} />
+              </Route>
+            </Routes>
+          )}
+
+          {!user && <Footer />}
+        </div>
       </Router>
       <ToastContainer />
     </div>
