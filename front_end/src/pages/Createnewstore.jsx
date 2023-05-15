@@ -26,7 +26,7 @@ const Createnewstore = () => {
 
       <p className="font-poppins text-base font-light text-neutral-800 mt-2">
         Already have a store?
-        <Link to={"/dashboard"}>
+        <Link to={"/"}>
           <span className="text-purplish hover:text-opacity-80">
             Go to dashbaord
           </span>
