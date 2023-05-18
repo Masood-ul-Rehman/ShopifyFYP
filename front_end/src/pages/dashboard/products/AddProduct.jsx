@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
-
+import { useDispatch } from "react-redux";
+import { AddProductThnuk } from "../../../store";
 function AddProduct() {
   const [formData, setFormData] = useState({
     id: "abcdef123qwe",
@@ -30,10 +31,10 @@ function AddProduct() {
       [e.target.name]: e.target.value,
     }));
   };
-
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    dispatch(AddProductThnuk(formData));
     console.log(selectedImage);
   };
 

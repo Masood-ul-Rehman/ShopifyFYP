@@ -44,8 +44,8 @@ const CreateWebsite = () => {
       bustype,
     };
 
-    console.log(selectedImage)
-    dispatch(NewWebsiteThunk(userData));
+    console.log(selectedImage);
+    // dispatch(NewWebsiteThunk(userData));
   };
   return (
     // <form onSubmit={onSubmit}>
@@ -118,35 +118,39 @@ const CreateWebsite = () => {
           </div>
 
           <div className="mt-16 relative">
-
             <label className="flex flex-col items-center w-full px-4 py-6 rounded-full border border-neutral-800 shadow-md tracking-wide cursor-pointer hover:bg-gray-100 focus:shadow-oline-purplish focus:border-purplish transition duration-150 ease-in-out">
-              <span className="text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-4 text-neutral-800 absolute left-0 -top-[36px]">Choose logo</span>
-              {
-                selectedImage ? <img src={selectedImage} alt="uploaded-img" className="w-8 h-8"  /> : 
-                (
-                  <svg
-                className="w-8 h-8 text-gray-400"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M5.886 14.139c-1.553-.92-2.03-2.735-1.11-4.287l6.166-10.396c.92-1.553 2.735-2.03 4.287-1.11l3.307 1.96c1.553.92 2.03 2.735 1.11 4.287L13.76 13.67c-.92 1.553-2.735 2.03-4.287 1.11l-3.307-1.96z"
-                  clipRule="evenodd"
-                ></path>
-                <path
-                  fillRule="evenodd"
-                  d="M10.597 6.768c-.92-1.553-.343-3.368 1.21-4.288l3.307-1.96c1.553-.92 3.368-.343 4.287 1.11l6.166 10.396c.92 1.553.343 3.368-1.21 4.287l-3.307 1.96c-1.553.92-3.368.343-4.287-1.11l-6.166-10.396z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
-                )
-              }
+              <span className="text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-4 text-neutral-800 absolute left-0 -top-[36px]">
+                Choose logo
+              </span>
+              {selectedImage ? (
+                <img
+                  src={selectedImage}
+                  alt="uploaded-img"
+                  className="w-8 h-8"
+                />
+              ) : (
+                <svg
+                  className="w-8 h-8 text-gray-400"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M5.886 14.139c-1.553-.92-2.03-2.735-1.11-4.287l6.166-10.396c.92-1.553 2.735-2.03 4.287-1.11l3.307 1.96c1.553.92 2.03 2.735 1.11 4.287L13.76 13.67c-.92 1.553-2.735 2.03-4.287 1.11l-3.307-1.96z"
+                    clipRule="evenodd"
+                  ></path>
+                  <path
+                    fillRule="evenodd"
+                    d="M10.597 6.768c-.92-1.553-.343-3.368 1.21-4.288l3.307-1.96c1.553-.92 3.368-.343 4.287 1.11l6.166 10.396c.92 1.553.343 3.368-1.21 4.287l-3.307 1.96c-1.553.92-3.368.343-4.287-1.11l-6.166-10.396z"
+                    clipRule="evenodd"
+                  ></path>
+                </svg>
+              )}
               <span className="mt-2 text-sm font-poppins leading-normal text-neutral-500">
                 Select a file
               </span>
-              
+
               <input
                 type="file"
                 accept="image/*"
