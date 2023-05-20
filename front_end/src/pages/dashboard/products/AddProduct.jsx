@@ -1,22 +1,23 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
-import { useDispatch } from "react-redux";
-import { AddProductThnuk } from "../../../store";
+import { addProduct } from "../../../store";
+
 function AddProduct() {
   const [formData, setFormData] = useState({
     title: "",
+    slug: "",
     description: "",
     price: 0,
-    category: "asf",
+    category: "",
     quantity: 0,
-    sold: 0,
-    colors: "",
+    color: "",
   });
-  const { title, description, details, price, quantity, colors, image } =
+  const { title, slug, description, price, category, quantity, color } =
     formData;
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [image, setSelectedImage] = useState(null);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -33,7 +34,7 @@ function AddProduct() {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(AddProductThnuk(formData));
+    dispatch(addProduct(formData));
   };
 
   return (
@@ -70,6 +71,44 @@ function AddProduct() {
                 className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
               />
             </div>
+
+            <div className="w-1/2 ml-6">
+              <label
+                htmlFor="id"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
+              >
+                Color
+              </label>
+              <input
+                required
+                type="text"
+                id="color"
+                name="color"
+                value={color}
+                onChange={onChange}
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+              />
+            </div>
+          </div>
+          <div className="flex w-full mt-6">
+            <div className="w-1/2">
+              <label
+                htmlFor="short-desc"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
+              >
+                Slug
+              </label>
+              <input
+                type="text"
+                id="shortDesc"
+                name="slug"
+                value={slug}
+                placeholder="Reliable & gives you the best performance"
+                onChange={onChange}
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+              />
+            </div>
+
             <div className="w-1/2 ml-6">
               <label
                 htmlFor="stock"
@@ -109,13 +148,13 @@ function AddProduct() {
                 htmlFor="title"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
               >
-                Color's
+                Category
               </label>
               <input
                 type="text"
-                id="colors"
-                name="colors"
-                value={colors}
+                id="category"
+                name="category"
+                value={category}
                 onChange={onChange}
                 className="no-button-increment form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full appearance-none"
               />
@@ -146,8 +185,8 @@ function AddProduct() {
               <span className="text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800 absolute left-0 -top-[36px]">
                 Product image
               </span>
-              {selectedImage ? (
-                <img src={selectedImage} alt="imgprod" className="w-8 h-8" />
+              {image ? (
+                <img src={image} alt="imgprod" className="w-8 h-8" />
               ) : (
                 <svg
                   className="w-8 h-8 text-gray-400"
@@ -179,6 +218,27 @@ function AddProduct() {
               />
             </label>
           </div>
+
+          <div className="mt-6">
+            <label
+              htmlFor="details"
+              className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
+            >
+              Full Description
+            </label>
+            <textarea
+              id="details"
+              name="description"
+              value={description}
+              onChange={onChange}
+              placeholder="Products details..."
+              className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+              rows="4"
+            >
+              Enter product details here...
+            </textarea>
+          </div>
+
           <Button type="submit" semiRounded simpleBlack styles="mt-10">
             Add Product
           </Button>

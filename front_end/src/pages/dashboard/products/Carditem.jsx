@@ -34,7 +34,9 @@ function Carditem({detail}) {
         </div>
 
         <div className="btns flex">
-          <Button semiRounded encourage>Update</Button>
+          <Link to="/dashboard/updateproduct">
+            <Button semiRounded encourage>Update</Button>
+          </Link>
           <Button semiRounded danger styles= "ml-6" onClick={handleShowModal}>Delete</Button>
         </div>
       </div>

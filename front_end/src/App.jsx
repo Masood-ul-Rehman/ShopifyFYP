@@ -12,12 +12,14 @@ import CreateWebsite from "./pages/CreateWebsite";
 import Layout from "./components/logedinuser/Layout";
 import Dashboradd from "./pages/dashboard/Dashboradd";
 import Products from "./pages/dashboard/products/Products";
+import AddProduct from "./pages/dashboard/products/AddProduct";
+import OrderPage from "./pages/dashboard/order/OrderPage";
+import Updateprod from "./pages/dashboard/products/UpdateProd";
 import "./index.css";
 
 // react redux
 import { useSelector } from "react-redux";
-import AddProduct from "./pages/dashboard/products/AddProduct";
-import OrderPage from "./pages/dashboard/order/OrderPage";
+
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -40,6 +42,7 @@ function App() {
                 <Route index element={<Dashboradd />} />
                 <Route path="products" element={<Products />} />
                 <Route path="addproducts" element={<AddProduct />} />
+                <Route path="updateproduct" element={<Updateprod />} />
                 <Route path="orders" element={<OrderPage />} />
               </Route>
             </Routes>
