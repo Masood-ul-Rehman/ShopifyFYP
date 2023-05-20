@@ -16,9 +16,7 @@ const AddProductThnuk = createAsyncThunk(
   "addProduct/new",
   async (data: inputData, thunkAPI: any) => {
     try {
-      const token = thunkAPI.getState().auth.user.token;
-
-      return await ProductService.addnewProduct(data, token);
+      return await ProductService.addnewProduct(data);
     } catch (error: any) {
       const message =
         (error.response &&

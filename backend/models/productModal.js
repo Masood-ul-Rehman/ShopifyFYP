@@ -12,7 +12,6 @@ const productSchema = mongoose.Schema(
     },
     slug: {
       type: String,
-      required: true,
       unique: true,
       lowercase: true,
     },
@@ -38,10 +37,11 @@ const productSchema = mongoose.Schema(
     },
     colors: {},
 
-    // image: {
-    //   data: Buffer,
-    //   contentType: String,
-    // },
+    image: {
+      data: Buffer,
+      contentType: String,
+      required: true,
+    },
     ratings: [
       {
         star: Number,

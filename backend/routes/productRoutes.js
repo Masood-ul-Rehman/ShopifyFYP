@@ -14,7 +14,7 @@ const upload = multer({ dest: "uploads/" });
 const { protect } = require("../middleware/authmiddleware");
 const router = express.Router();
 
-router.post("/addProduct", upload.single("image"), addProduct);
+router.post("/addProduct", protect, upload.single("image"), addProduct);
 router.put("/:id", protect, updateProduct);
 router.delete("/:id", deleteProduct);
 router.get("/:id", getaProduct);

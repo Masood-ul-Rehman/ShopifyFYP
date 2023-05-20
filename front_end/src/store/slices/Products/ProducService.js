@@ -3,20 +3,15 @@ import axiosInstance from "../../axioshelper";
 const API_URL = "http://localhost:5000/api/product";
 
 const User = localStorage.getItem("user");
-const addnewProduct = async (data, token) => {
-  const user = User.slice(2);
+const addnewProduct = async (data) => {
+  const user = User.slice(1);
   const fuser = user.slice(0, -1);
-
   const fdata = {
     User: fuser,
     ...data,
   };
-  const config = {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  };
-  const response = await axios.post(`${API_URL}/addProduct`, fdata, config);
+
+  const response = await axiosInstance.post(`${API_URL}/addProduct`, fdata);
 
   return response.data;
 };
