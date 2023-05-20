@@ -1,20 +1,33 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
+import { addProduct } from "../../../store";
+
 
 function AddProduct() {
-  const [formData, setFormData] = useState({
-    id: "abcdef123qwe",
-    title: "",
-    shortDesc: "",
-    details: "",
-    price: 0,
-    quantity: 0,
-    discount: 0,
-  });
-  const { id, title, shortDesc, details, price, quantity, discount } = formData;
 
-  const [selectedImage, setSelectedImage] = useState(null);
+  const dispatch = useDispatch();
+
+  const userId = JSON.parse(localStorage.getItem('user'))._id;
+
+  
+
+
+
+  const [formData, setFormData] = useState({
+    User: userId,
+    title: "",
+    slug: "",
+    description: "",
+    price: 0,
+    category: "",
+    quantity: 0,
+    color: "",
+  });
+  const { User, title, slug, description, price, category, quantity, color } = formData;
+
+  const [image, setSelectedImage] = useState(null);
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -33,8 +46,7 @@ function AddProduct() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(selectedImage);
+    dispatch(addProduct({formData, image}));
   };
 
   return (
@@ -54,24 +66,8 @@ function AddProduct() {
       <div className="add-products mt-6 w-[95%] lg:w-[90%] pt-4 pb-12">
         <form onSubmit={handleSubmit} noValidate>
           <div className="flex w-full">
-            <div className="w-1/2">
-              <label
-                htmlFor="id"
-                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
-              >
-                Product Id
-              </label>
-              <input
-                disabled
-                type="text"
-                id="id"
-                name="id"
-                value={id}
-                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
-              />
-            </div>
 
-            <div className="w-1/2 ml-6">
+          <div className="w-1/2">
               <label
                 htmlFor="title"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
@@ -88,6 +84,27 @@ function AddProduct() {
                 className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
               />
             </div>
+
+
+            <div className="w-1/2 ml-6">
+              <label
+                htmlFor="id"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
+              >
+                Color
+              </label>
+              <input
+                required
+                type="text"
+                id="color"
+                name="color"
+                value={color}
+                onChange={onChange}
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+              />
+            </div>
+
+            
           </div>
           <div className="flex w-full mt-6">
             <div className="w-1/2">
@@ -95,13 +112,13 @@ function AddProduct() {
                 htmlFor="short-desc"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
               >
-                Short description
+                Slug
               </label>
               <input
                 type="text"
                 id="shortDesc"
-                name="shortDesc"
-                value={shortDesc}
+                name="slug"
+                value={slug}
                 placeholder="Reliable & gives you the best performance"
                 onChange={onChange}
                 className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
@@ -149,13 +166,13 @@ function AddProduct() {
                 htmlFor="discount"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
               >
-                Discount %age
+                Category
               </label>
               <input
-                type="number"
-                id="discount"
-                name="discount"
-                value={discount}
+                type="text"
+                id="category"
+                name="category"
+                value={category}
                 onChange={onChange}
                 className="no-button-increment form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full appearance-none"
               />
@@ -167,8 +184,8 @@ function AddProduct() {
               <span className="text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800 absolute left-0 -top-[36px]">
                 Product image
               </span>
-              {selectedImage ? (
-                <img src={selectedImage} alt="imgprod" className="w-8 h-8" />
+              {image ? (
+                <img src={image} alt="imgprod" className="w-8 h-8" />
               ) : (
                 <svg
                   className="w-8 h-8 text-gray-400"
@@ -210,8 +227,8 @@ function AddProduct() {
             </label>
             <textarea
               id="details"
-              name="details"
-              value={details}
+              name="description"
+              value={description}
               onChange={onChange}
               placeholder="Products details..."
               className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"

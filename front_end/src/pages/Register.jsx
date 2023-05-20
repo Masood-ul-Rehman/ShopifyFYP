@@ -31,7 +31,7 @@ function Register() {
     }
 
     if (isSuccess || user) {
-      navigate("/");
+      navigate("/createstore");
     }
 
     dispatch(reset());
@@ -63,7 +63,6 @@ function Register() {
   if (isLoading) {
     return (
       <Loader />
-      // <h1>Loading....</h1>
     );
   }
 
