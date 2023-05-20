@@ -38,10 +38,10 @@ const productSchema = mongoose.Schema(
     },
     colors: {},
 
-    image: {
-      data: Buffer,
-      contentType: String,
-    },
+    // image: {
+    //   data: Buffer,
+    //   contentType: String,
+    // },
     ratings: [
       {
         star: Number,

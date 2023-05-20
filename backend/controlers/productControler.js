@@ -31,7 +31,7 @@ const addProduct = asyncHandler(async (req, res) => {
       quantity,
       sold,
       colors,
-      image: { data: req.file.filename },
+      // image: { data: req.file.filename },
     });
     if (req.file) {
       newProduct.image = {

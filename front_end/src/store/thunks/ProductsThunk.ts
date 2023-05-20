@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { ProductService } from "../slices/Products/ProducService";
 interface inputData {
+  User: string;
   title: string;
   slug: string;
   description: string;
@@ -13,9 +14,11 @@ interface inputData {
 }
 const AddProductThnuk = createAsyncThunk(
   "addProduct/new",
-  async (data: inputData, thunkAPI) => {
+  async (data: inputData, thunkAPI: any) => {
     try {
-      return await ProductService.addnewProduct(data);
+      const token = thunkAPI.getState().auth.user.token;
+
+      return await ProductService.addnewProduct(data, token);
     } catch (error: any) {
       const message =
         (error.response &&

@@ -7,11 +7,11 @@ const axiosInstance = axios.create({
   },
 });
 const addBearerToken = (config: any) => {
-  const token = localStorage.getItem("token"); // Retrieve the token from wherever you store it (e.g., localStorage, Redux store, etc.)
+  let token = localStorage.getItem("token"); // Retrieve the token from wherever you store it (e.g., localStorage, Redux store, etc.)
   if (token) {
     config.headers = {
       ...config.headers,
-      Bearer: `${token}`,
+      Authorization: `Bearer ${token}`,
     };
   }
   return config;
