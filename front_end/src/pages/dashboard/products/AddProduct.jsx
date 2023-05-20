@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import { AddProductThnuk } from "../../../store";
+import { uploadMultiThunk } from "../../../store/thunks/uploadThunk";
 
 function AddProduct() {
   const [formData, setFormData] = useState({
@@ -18,17 +19,31 @@ function AddProduct() {
     formData;
 
   const [image, setSelectedImage] = useState(null);
+  const [multipleFiles, setMultipleFiles] = useState([]);
+  // const handleMultipleFilesChange = (event) => {
+  //   setMultipleFiles(Array.from(event.target.files));
+  // };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(file));
+  const handleImageChange = async (event) => {
+    setMultipleFiles(Array.from(event.target.files));
+
+    try {
+      const formData = new FormData();
+      multipleFiles.forEach((file) => {
+        formData.append("images", file);
+      });
+      dispatch(uploadMultiThunk(formData));
+      console.log("Files uploaded successfully");
+      // fetchImages(); // Refresh the image list
+    } catch (error) {
+      console.error("Error uploading files:", error);
+    }
   };
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-      // image: selectedImage,
     }));
   };
   const dispatch = useDispatch();
@@ -215,28 +230,9 @@ function AddProduct() {
                 accept="image/*"
                 className="hidden"
                 onChange={handleImageChange}
+                multiple="multiple"
               />
             </label>
-          </div>
-
-          <div className="mt-6">
-            <label
-              htmlFor="details"
-              className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
-            >
-              Full Description
-            </label>
-            <textarea
-              id="details"
-              name="description"
-              value={description}
-              onChange={onChange}
-              placeholder="Products details..."
-              className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
-              rows="4"
-            >
-              Enter product details here...
-            </textarea>
           </div>
 
           <Button type="submit" semiRounded simpleBlack styles="mt-10">

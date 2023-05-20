@@ -32,10 +32,14 @@ const uploadMultipleImages = async (req, res) => {
       path: file.path,
       originalName: file.originalname,
     }));
-    await Image.insertMany(images);
 
+    await Image.insertMany(images);
+    let names = {};
+    files.map((name, index) => {
+      names = { filename: name.filename };
+    });
     // Files uploaded successfully
-    res.send(filename);
+    res.send("names");
   } catch (error) {
     console.error("Error uploading files:", error);
     res.status(500).send("Error uploading files");
