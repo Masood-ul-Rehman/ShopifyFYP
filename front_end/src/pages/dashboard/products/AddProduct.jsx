@@ -20,22 +20,20 @@ function AddProduct() {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-
     setSelectedImage(URL.createObjectURL(file));
   };
 
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
-      image: selectedImage,
       [e.target.name]: e.target.value,
+      // image: selectedImage,
     }));
   };
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(AddProductThnuk(formData));
-    console.log(selectedImage);
   };
 
   return (
