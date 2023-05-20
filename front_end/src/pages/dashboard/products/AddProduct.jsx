@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
-import { addProduct } from "../../../store";
+import { AddProductThnuk } from "../../../store";
 
 function AddProduct() {
   const [formData, setFormData] = useState({
@@ -34,7 +34,7 @@ function AddProduct() {
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addProduct(formData));
+    dispatch(AddProductThnuk(formData));
   };
 
   return (
