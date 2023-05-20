@@ -13,19 +13,19 @@ export const DASHBOARD_SIDEBAR_LINKS = [
   {
     key: "dashboard",
     label: "Dashboard",
-    path: "/dashboard",
+    path: "/",
     icon: <HiOutlineViewGrid />,
   },
   {
     key: "products",
     label: "Products",
-    path: "/dashboard/products",
+    path: "/products",
     icon: <HiOutlineCube />,
   },
   {
     key: "orders",
     label: "Orders",
-    path: "/dashboard/orders",
+    path: "/orders",
     icon: <HiOutlineShoppingCart />,
   },
 ];

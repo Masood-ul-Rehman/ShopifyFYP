@@ -2,10 +2,27 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
+<<<<<<< HEAD
 import { addProduct } from "../../../store";
 
 
 function AddProduct() {
+=======
+import { useDispatch } from "react-redux";
+import { AddProductThnuk } from "../../../store";
+function AddProduct() {
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    price: 0,
+    category: "asf",
+    quantity: 0,
+    sold: 0,
+    colors: "",
+  });
+  const { title, description, details, price, quantity, colors, image } =
+    formData;
+>>>>>>> 1c4d97e84c5bf71b64be10f9be8def85559ea299
 
   const dispatch = useDispatch();
 
@@ -31,8 +48,6 @@ function AddProduct() {
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
-    // creates a URL for the selected file object
-    // represents the file contents as a binary string
 
     setSelectedImage(URL.createObjectURL(file));
   };
@@ -40,13 +55,19 @@ function AddProduct() {
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
+      image: selectedImage,
       [e.target.name]: e.target.value,
     }));
   };
-
+  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     dispatch(addProduct({formData, image}));
+=======
+    dispatch(AddProductThnuk(formData));
+    console.log(selectedImage);
+>>>>>>> 1c4d97e84c5bf71b64be10f9be8def85559ea299
   };
 
   return (
@@ -54,7 +75,7 @@ function AddProduct() {
       <div className="row">
         <div className="flex justify-between items-center py-4">
           <h1 className="font-poppins font-medium text-6xl">Add Product</h1>
-          <Link to="/dashboard">
+          <Link to="/">
             <Button semiRounded simpleBlack>
               Back to dashboard
             </Button>
@@ -66,8 +87,12 @@ function AddProduct() {
       <div className="add-products mt-6 w-[95%] lg:w-[90%] pt-4 pb-12">
         <form onSubmit={handleSubmit} noValidate>
           <div className="flex w-full">
+<<<<<<< HEAD
 
           <div className="w-1/2">
+=======
+            <div className="w-1/2 ">
+>>>>>>> 1c4d97e84c5bf71b64be10f9be8def85559ea299
               <label
                 htmlFor="title"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
@@ -84,6 +109,7 @@ function AddProduct() {
                 className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
               />
             </div>
+<<<<<<< HEAD
 
 
             <div className="w-1/2 ml-6">
@@ -125,12 +151,14 @@ function AddProduct() {
               />
             </div>
 
+=======
+>>>>>>> 1c4d97e84c5bf71b64be10f9be8def85559ea299
             <div className="w-1/2 ml-6">
               <label
                 htmlFor="stock"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
               >
-                Stock
+                Product Stock
               </label>
               <input
                 type="number"
@@ -142,9 +170,8 @@ function AddProduct() {
               />
             </div>
           </div>
-
           <div className="flex w-full mt-6">
-            <div className="w-1/2">
+            <div className="w-1/2 ">
               <label
                 htmlFor="title"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
@@ -160,12 +187,12 @@ function AddProduct() {
                 className="no-button-increment form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full appearance-none"
               />
             </div>
-
             <div className="w-1/2 ml-6">
               <label
-                htmlFor="discount"
+                htmlFor="title"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
               >
+<<<<<<< HEAD
                 Category
               </label>
               <input
@@ -173,12 +200,40 @@ function AddProduct() {
                 id="category"
                 name="category"
                 value={category}
+=======
+                Color's
+              </label>
+              <input
+                type="text"
+                id="colors"
+                name="colors"
+                value={colors}
+>>>>>>> 1c4d97e84c5bf71b64be10f9be8def85559ea299
                 onChange={onChange}
                 className="no-button-increment form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full appearance-none"
               />
             </div>
           </div>
 
+          <div className="mt-6">
+            <label
+              htmlFor="details"
+              className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
+            >
+              Full Description
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              value={description}
+              onChange={onChange}
+              placeholder="Products details..."
+              className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+              rows="4"
+            >
+              Enter product details here...
+            </textarea>
+          </div>
           <div className="mt-16 relative">
             <label className="flex flex-col items-center w-full px-4 py-6 rounded-md bg-white border border-neutral-800 shadow-md tracking-wide cursor-pointer focus:shadow-oline-neutral-800 transition duration-150 ease-in-out">
               <span className="text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800 absolute left-0 -top-[36px]">
@@ -217,6 +272,7 @@ function AddProduct() {
               />
             </label>
           </div>
+<<<<<<< HEAD
 
           <div className="mt-6">
             <label
@@ -238,8 +294,10 @@ function AddProduct() {
             </textarea>
           </div>
 
+=======
+>>>>>>> 1c4d97e84c5bf71b64be10f9be8def85559ea299
           <Button type="submit" semiRounded simpleBlack styles="mt-10">
-            Add now
+            Add Product
           </Button>
         </form>
       </div>

@@ -10,7 +10,7 @@ function OrderPage() {
         <div className="row">
           <div className="flex justify-between items-center py-4">
             <h1 className="font-poppins font-medium text-6xl">Add Product</h1>
-            <Link to="/dashboard">
+            <Link to="/">
               <Button semiRounded simpleBlack>
                 Back to dashboard
               </Button>

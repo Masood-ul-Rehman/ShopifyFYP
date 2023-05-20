@@ -12,7 +12,6 @@ const productSchema = mongoose.Schema(
     },
     slug: {
       type: String,
-      required: true,
       unique: true,
       lowercase: true,
     },
@@ -41,6 +40,7 @@ const productSchema = mongoose.Schema(
     image: {
       data: Buffer,
       contentType: String,
+      required: true,
     },
     ratings: [
       {

@@ -28,36 +28,17 @@ function App() {
     <div>
       <Router>
         <div className="main-content">
-          {/* {
-          // need this to do in better way
-          user ? (
-            <Header />
-          ) : (
-            <Routes>
-              <Route path="/dashboard" element={<Layout />}>
-                <Route index element={<Dashboradd />} />
-                <Route path="products" element={<Products />} />
-              </Route>
-            </Routes>
-          )
-        } */}
-
           {!user && <Header />}
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            {/* <Route path="/resetpassword" element={<ResetPassword />} /> */}
-            {/* <Route path="/createstore" element={<Createnewstore />} /> */}
-            {/* <Route path="/create" element={<CreateWebsite />} /> */}
           </Routes>
-
           {user && (
             <Routes>
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/createstore" element={<Createnewstore />} />
               <Route path="/create" element={<CreateWebsite />} />
-              <Route path="/dashboard" element={<Layout />}>
+              <Route path="/" element={<Layout />}>
                 <Route index element={<Dashboradd />} />
                 <Route path="products" element={<Products />} />
                 <Route path="addproducts" element={<AddProduct />} />
@@ -66,6 +47,7 @@ function App() {
               </Route>
             </Routes>
           )}
+          {!user && <Home />}
 
           {!user && <Footer />}
         </div>
