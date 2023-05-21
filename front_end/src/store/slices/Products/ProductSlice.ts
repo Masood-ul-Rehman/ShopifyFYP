@@ -4,7 +4,6 @@ interface MySliceState {
   isLoading: boolean;
   isError: boolean;
   isSuccess: boolean;
-
   isMessage: any;
 }
 const initialState: MySliceState = {

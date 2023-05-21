@@ -4,37 +4,40 @@ import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import { AddProductThnuk } from "../../../store";
 import { uploadMultiThunk } from "../../../store/thunks/uploadThunk";
-
+import { useSelector } from "react-redux";
+import { selectIsLoading } from "../../../store/slices/uploadImage/uploadSlice";
 function AddProduct() {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = useState({
     title: "",
-    slug: "",
     description: "",
+    slug: "as",
     price: 0,
     category: "",
     quantity: 0,
     color: "",
+    image: "",
   });
-  const { title, slug, description, price, category, quantity, color } =
-    formData;
+  const { title, description, price, category, quantity, color } = formData;
 
-  const [image, setSelectedImage] = useState(null);
   const [multipleFiles, setMultipleFiles] = useState([]);
-  // const handleMultipleFilesChange = (event) => {
-  //   setMultipleFiles(Array.from(event.target.files));
-  // };
+  const handleMultipleFilesChange = (event) => {
+    setMultipleFiles(Array.from(event.target.files));
+  };
+  // const imageData = useSelector(multiUpload.names);
+  let imageData = useSelector((state) => state.uploadMulti.filenames);
 
   const handleImageChange = async (event) => {
     setMultipleFiles(Array.from(event.target.files));
-
     try {
-      const formData = new FormData();
+      const imageData = new FormData();
       multipleFiles.forEach((file) => {
-        formData.append("images", file);
+        imageData.append("images", file);
       });
-      dispatch(uploadMultiThunk(formData));
+      console.log(multipleFiles);
+      dispatch(uploadMultiThunk(imageData));
       console.log("Files uploaded successfully");
-      // fetchImages(); // Refresh the image list
     } catch (error) {
       console.error("Error uploading files:", error);
     }
@@ -46,9 +49,13 @@ function AddProduct() {
       [e.target.name]: e.target.value,
     }));
   };
-  const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
+    setFormData((state) => ({
+      ...state,
+      image: imageData,
+    }));
+    console.log(formData);
     dispatch(AddProductThnuk(formData));
   };
 
@@ -67,7 +74,7 @@ function AddProduct() {
       </div>
 
       <div className="add-products mt-6 w-[95%] lg:w-[90%] pt-4 pb-12">
-        <form onSubmit={handleSubmit} noValidate>
+        <form noValidate onSubmit={handleSubmit}>
           <div className="flex w-full">
             <div className="w-1/2 ">
               <label
@@ -106,24 +113,22 @@ function AddProduct() {
             </div>
           </div>
           <div className="flex w-full mt-6">
-            <div className="w-1/2">
+            <div className="w-1/2 ">
               <label
-                htmlFor="short-desc"
+                htmlFor="title"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
               >
-                Slug
+                Product Price
               </label>
               <input
-                type="text"
-                id="shortDesc"
-                name="slug"
-                value={slug}
-                placeholder="Reliable & gives you the best performance"
+                type="number"
+                id="price"
+                name="price"
+                value={price}
                 onChange={onChange}
-                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+                className="no-button-increment form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full appearance-none"
               />
             </div>
-
             <div className="w-1/2 ml-6">
               <label
                 htmlFor="stock"
@@ -143,22 +148,6 @@ function AddProduct() {
           </div>
           <div className="flex w-full mt-6">
             <div className="w-1/2 ">
-              <label
-                htmlFor="title"
-                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
-              >
-                Product Price
-              </label>
-              <input
-                type="number"
-                id="price"
-                name="price"
-                value={price}
-                onChange={onChange}
-                className="no-button-increment form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full appearance-none"
-              />
-            </div>
-            <div className="w-1/2 ml-6">
               <label
                 htmlFor="title"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
@@ -196,43 +185,15 @@ function AddProduct() {
             </textarea>
           </div>
           <div className="mt-16 relative">
-            <label className="flex flex-col items-center w-full px-4 py-6 rounded-md bg-white border border-neutral-800 shadow-md tracking-wide cursor-pointer focus:shadow-oline-neutral-800 transition duration-150 ease-in-out">
-              <span className="text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800 absolute left-0 -top-[36px]">
-                Product image
-              </span>
-              {image ? (
-                <img src={image} alt="imgprod" className="w-8 h-8" />
-              ) : (
-                <svg
-                  className="w-8 h-8 text-gray-400"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M5.886 14.139c-1.553-.92-2.03-2.735-1.11-4.287l6.166-10.396c.92-1.553 2.735-2.03 4.287-1.11l3.307 1.96c1.553.92 2.03 2.735 1.11 4.287L13.76 13.67c-.92 1.553-2.735 2.03-4.287 1.11l-3.307-1.96z"
-                    clipRule="evenodd"
-                  ></path>
-                  <path
-                    fillRule="evenodd"
-                    d="M10.597 6.768c-.92-1.553-.343-3.368 1.21-4.288l3.307-1.96c1.553-.92 3.368-.343 4.287 1.11l6.166 10.396c.92 1.553.343 3.368-1.21 4.287l-3.307 1.96c-1.553.92-3.368.343-4.287-1.11l-6.166-10.396z"
-                    clipRule="evenodd"
-                  ></path>
-                </svg>
-              )}
-              <span className="mt-2 text-sm font-poppins leading-normal text-neutral-500">
-                upload image
-              </span>
-
-              <input
-                type="file"
-                accept="image/*"
-                className="hidden"
-                onChange={handleImageChange}
-                multiple="multiple"
-              />
-            </label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleMultipleFilesChange}
+              multiple="multiple"
+            />
+            <button onClick={handleImageChange} className="bg-red text-white">
+              Upload images
+            </button>
           </div>
 
           <Button type="submit" semiRounded simpleBlack styles="mt-10">

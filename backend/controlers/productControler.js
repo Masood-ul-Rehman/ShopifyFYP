@@ -1,7 +1,7 @@
 const User = require("../models/userModal");
 const Product = require("../models/productModal");
 const asyncHandler = require("express-async-handler");
-const slugify = require("slugify");
+// const slugify = require("slugify");
 const addProduct = asyncHandler(async (req, res) => {
   try {
     const {
@@ -16,28 +16,25 @@ const addProduct = asyncHandler(async (req, res) => {
       colors,
       image,
     } = req.body;
-    if (req.body.title) {
-      req.body.slug = slugify(req.body.title);
-    }
+    // let mytitle = JSON.stringify(req.body.title);
+    // console.log(mytitle, "stringy one    " + req.body.title);
+    // if (req.body.title) {
+    //   req.body.slug = slugify(mytitle);
+    // }
 
-    const createdSlug = slugify(req.body.title);
+    // const createdSlug = slugify(req.body.title);
     const newProduct = await Product.create({
       User,
       title,
-      slug: createdSlug,
+      slug: slug,
       description,
       price,
       category,
       quantity,
       sold,
       colors,
-      image: { data: req.file.filename },
+      image,
     });
-    if (req.file) {
-      newProduct.image = {
-        data: req.file.filename,
-      };
-    }
     res.json(newProduct);
   } catch (error) {
     throw new Error(error);

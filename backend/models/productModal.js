@@ -14,6 +14,7 @@ const productSchema = mongoose.Schema(
       type: String,
       unique: true,
       lowercase: true,
+      require: false,
     },
     description: {
       type: String,
@@ -35,6 +36,7 @@ const productSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    discount: { type: Number, required: false },
     colors: {},
 
     image: {

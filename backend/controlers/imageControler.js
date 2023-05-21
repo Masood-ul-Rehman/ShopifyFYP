@@ -39,7 +39,7 @@ const uploadMultipleImages = async (req, res) => {
       names = { filename: name.filename };
     });
     // Files uploaded successfully
-    res.send("names");
+    res.send(names);
   } catch (error) {
     console.error("Error uploading files:", error);
     res.status(500).send("Error uploading files");

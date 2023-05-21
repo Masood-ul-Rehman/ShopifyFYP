@@ -16,9 +16,8 @@ const app = express();
 //   uri: process.env.MONGO_URI,
 //   collection: "sessions",
 // });
-
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));

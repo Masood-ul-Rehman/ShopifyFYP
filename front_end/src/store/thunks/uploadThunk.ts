@@ -18,7 +18,7 @@ const uploadSingleThunk = createAsyncThunk(
 );
 const uploadMultiThunk = createAsyncThunk(
   "addProduct/new",
-  async (data: Array<String>, thunkAPI: any) => {
+  async (data: any, thunkAPI: any) => {
     try {
       return await ProductService.uploadMulti(data);
     } catch (error: any) {
