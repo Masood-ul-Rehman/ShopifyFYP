@@ -1,4 +1,4 @@
-import PropTypes, { element } from "prop-types";
+import PropTypes from "prop-types";
 import React, { useEffect, Suspense, lazy } from "react";
 import ScrollToTop from "./helpers/scroll-top";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
