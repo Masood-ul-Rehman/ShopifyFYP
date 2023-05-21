@@ -1,0 +1,178 @@
+[
+  {
+    "id": "18",
+    "sku": "asdf140",
+    "name": "Lorem ipsum chair one",
+    "price": 15.6,
+    "discount": 0,
+    "new": false,
+    "rating": 4,
+    "saleCount": 90,
+    "category": ["furniture"],
+    "tag": ["furniture"],
+    "stock": 15,
+    "image": [
+      "/assets/img/product/furnitures/1.jpg",
+      "/assets/img/product/furnitures/2.jpg",
+      "/assets/img/product/furnitures/3.jpg",
+      "/assets/img/product/furnitures/4.jpg",
+      "/assets/img/product/furnitures/5.jpg"
+    ],
+    "shortDescription": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "fullDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "id": "19",
+    "sku": "asdf141",
+    "name": "Lorem ipsum chair two",
+    "price": 10.6,
+    "discount": 10,
+    "new": true,
+    "rating": 5,
+    "saleCount": 190,
+    "category": ["furniture"],
+    "tag": ["furniture"],
+    "stock": 25,
+    "image": [
+      "/assets/img/product/furnitures/2.jpg",
+      "/assets/img/product/furnitures/3.jpg",
+      "/assets/img/product/furnitures/4.jpg",
+      "/assets/img/product/furnitures/5.jpg",
+      "/assets/img/product/furnitures/6.jpg"
+    ],
+    "shortDescription": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "fullDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "id": "20",
+    "sku": "asdf142",
+    "name": "Lorem ipsum chair three",
+    "price": 12.5,
+    "discount": 20,
+    "new": true,
+    "rating": 3,
+    "saleCount": 90,
+    "category": ["furniture"],
+    "tag": ["furniture"],
+    "stock": 20,
+    "image": [
+      "/assets/img/product/furnitures/3.jpg",
+      "/assets/img/product/furnitures/4.jpg",
+      "/assets/img/product/furnitures/5.jpg",
+      "/assets/img/product/furnitures/6.jpg",
+      "/assets/img/product/furnitures/7.jpg"
+    ],
+    "shortDescription": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "fullDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "id": "21",
+    "sku": "asdf143",
+    "name": "Lorem ipsum sofa one",
+    "price": 14.5,
+    "discount": 30,
+    "new": false,
+    "rating": 4,
+    "saleCount": 100,
+    "category": ["furniture"],
+    "tag": ["furniture"],
+    "stock": 40,
+    "image": [
+      "/assets/img/product/furnitures/4.jpg",
+      "/assets/img/product/furnitures/5.jpg",
+      "/assets/img/product/furnitures/6.jpg",
+      "/assets/img/product/furnitures/7.jpg",
+      "/assets/img/product/furnitures/8.jpg"
+    ],
+    "shortDescription": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "fullDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "id": "22",
+    "sku": "asdf144",
+    "name": "Lorem ipsum sofa two",
+    "price": 22.5,
+    "discount": 10,
+    "new": true,
+    "rating": 5,
+    "saleCount": 120,
+    "category": ["furniture"],
+    "tag": ["furniture"],
+    "stock": 45,
+    "image": [
+      "/assets/img/product/furnitures/5.jpg",
+      "/assets/img/product/furnitures/6.jpg",
+      "/assets/img/product/furnitures/7.jpg",
+      "/assets/img/product/furnitures/8.jpg",
+      "/assets/img/product/furnitures/1.jpg"
+    ],
+    "shortDescription": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "fullDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "id": "23",
+    "sku": "asdf145",
+    "name": "Lorem ipsum sofa three",
+    "price": 12.5,
+    "discount": 0,
+    "new": false,
+    "rating": 4,
+    "saleCount": 20,
+    "category": ["furniture"],
+    "tag": ["furniture"],
+    "stock": 5,
+    "image": [
+      "/assets/img/product/furnitures/6.jpg",
+      "/assets/img/product/furnitures/7.jpg",
+      "/assets/img/product/furnitures/8.jpg",
+      "/assets/img/product/furnitures/1.jpg",
+      "/assets/img/product/furnitures/2.jpg"
+    ],
+    "shortDescription": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "fullDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "id": "24",
+    "sku": "asdf146",
+    "name": "Lorem ipsum sofa four",
+    "price": 22.5,
+    "discount": 20,
+    "new": true,
+    "rating": 5,
+    "saleCount": 25,
+    "category": ["furniture"],
+    "tag": ["furniture"],
+    "stock": 7,
+    "image": [
+      "/assets/img/product/furnitures/7.jpg",
+      "/assets/img/product/furnitures/8.jpg",
+      "/assets/img/product/furnitures/1.jpg",
+      "/assets/img/product/furnitures/2.jpg",
+      "/assets/img/product/furnitures/3.jpg"
+    ],
+    "shortDescription": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "fullDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  },
+  {
+    "id": "25",
+    "sku": "asdf147",
+    "name": "Lorem ipsum sofa five",
+    "price": 32.5,
+    "discount": 10,
+    "new": true,
+    "rating": 4,
+    "saleCount": 15,
+    "category": ["furniture"],
+    "tag": ["furniture"],
+    "stock": 6,
+    "image": [
+      "/assets/img/product/furnitures/8.jpg",
+      "/assets/img/product/furnitures/1.jpg",
+      "/assets/img/product/furnitures/2.jpg",
+      "/assets/img/product/furnitures/3.jpg",
+      "/assets/img/product/furnitures/4.jpg"
+    ],
+    "shortDescription": "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
+    "fullDescription": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt."
+  }
+]

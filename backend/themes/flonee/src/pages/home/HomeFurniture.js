@@ -1,0 +1,41 @@
+import React, { Fragment } from "react";
+import MetaTags from "react-meta-tags";
+import LayoutOne from "../../layouts/LayoutOne";
+import TabProductTwo from "../../wrappers/product/TabProductTwo";
+import HeroSliderNineteen from "../../wrappers/hero-slider/HeroSliderNineteen";
+import BannerSixteen from "../../wrappers/banner/BannerSixteen";
+import BannerFifteen from "../../wrappers/banner/BannerFifteen";
+
+const HomeFurniture = () => {
+  return (
+    <Fragment>
+      <MetaTags>
+        <title>Furniture Home</title>
+        <meta name="description" content="Furniture home." />
+      </MetaTags>
+
+      <LayoutOne
+        headerContainerClass="container-fluid"
+        headerPaddingClass="header-padding-2"
+        headerTop="visible"
+      >
+        {/* hero slider */}
+        <HeroSliderNineteen />
+
+        {/* banner */}
+        <BannerFifteen spaceTopClass="pt-10" spaceBottomClass="pb-85" />
+
+        {/* feature icon */}
+
+        {/* tab product */}
+        <TabProductTwo spaceBottomClass="pb-100" category="furniture" />
+        {/* banner */}
+        <BannerSixteen spaceTopClass="pt-95" />
+
+        {/* newsletter */}
+      </LayoutOne>
+    </Fragment>
+  );
+};
+
+export default HomeFurniture;
