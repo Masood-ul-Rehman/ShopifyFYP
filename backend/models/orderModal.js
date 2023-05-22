@@ -15,7 +15,7 @@ const orderSchema = mongoose.Schema(
       type: Number,
       required: true,
     },
-    customer: {
+    customerName: {
       type: String,
     },
   },

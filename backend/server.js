@@ -27,6 +27,8 @@ app.use("/api/create", require("./routes/detailsRoutes"));
 app.use("/api/product", require("./routes/productRoutes"));
 app.use("/api/complete", require("./routes/completeSetupRoutes"));
 app.use("/api/image", require("./routes/imageRoutes"));
+app.use("/api/order", require("./routes/imageRoutes"));
+
 // Serve frontend
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/build")));
