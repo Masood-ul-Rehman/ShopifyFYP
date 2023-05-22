@@ -1,9 +1,12 @@
 const User = require("../models/userModal");
 const Product = require("../models/productModal");
 const asyncHandler = require("express-async-handler");
-// const slugify = require("slugify");
+const slugify = require("slugify");
+const Image = require("../models/ImageModal");
+
 const addProduct = asyncHandler(async (req, res) => {
   try {
+    console.log(req.body);
     const {
       User,
       title,
@@ -16,24 +19,34 @@ const addProduct = asyncHandler(async (req, res) => {
       colors,
       image,
     } = req.body;
-    // let mytitle = JSON.stringify(req.body.title);
-    // console.log(mytitle, "stringy one    " + req.body.title);
-    // if (req.body.title) {
-    //   req.body.slug = slugify(mytitle);
-    // }
+    if (req.body.title) {
+      req.body.slug = slugify(req.body.title);
+    }
 
-    // const createdSlug = slugify(req.body.title);
+    const createdSlug = slugify(req.body.title);
     const newProduct = await Product.create({
       User,
       title,
-      slug: slug,
+      slug: createdSlug,
       description,
       price,
       category,
       quantity,
       sold,
       colors,
-      image,
+    });
+    const images = req.files.map((file) => {
+      newProduct.User = User;
+      newProduct.image = {
+        filename: file.filename,
+        path: file.path,
+        originalName: file.originalname,
+      };
+    });
+    await Image.insertMany(images);
+    let names = {};
+    files.map((name, index) => {
+      names = { filename: name.filename };
     });
     res.json(newProduct);
   } catch (error) {

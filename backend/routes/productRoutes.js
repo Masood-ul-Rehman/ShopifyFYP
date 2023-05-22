@@ -9,14 +9,15 @@ const {
   addToWishlist,
   rating,
 } = require("../controlers/productControler");
+const { protect } = require("../middleware/authmiddleware");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
-const { protect } = require("../middleware/authmiddleware");
+
 const router = express.Router();
 
-router.post("/addProduct", protect, addProduct);
+router.post("/addProduct", protect, upload.array("image"), addProduct);
 router.post("/upload");
-router.put("/:id", protect, updateProduct);
+router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
 router.get("/:id", getaProduct);
 router.get("/", getAllProduct);
