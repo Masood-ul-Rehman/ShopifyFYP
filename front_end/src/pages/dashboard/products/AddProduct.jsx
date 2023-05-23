@@ -9,13 +9,14 @@ function AddProduct() {
   const [formData, setFormData] = useState({
     title: "",
     description: "",
+    shortdesc: "",
     slug: "",
     price: 0,
     quantity: 0,
     color: "",
     image: null,
   });
-  const { title, description, price, quantity, color } = formData;
+  const { title, description, shortdesc, price, quantity, color } = formData;
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -127,7 +128,24 @@ function AddProduct() {
               />
             </div>
           </div>
-
+          <div className="flex w-full mt-6">
+            <div className="w-1/2 ">
+              <label
+                htmlFor="stock"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
+              >
+                Short Description
+              </label>
+              <input
+                type="number"
+                id="shortdesc"
+                name="shortdesc"
+                value={shortdesc}
+                onChange={onChange}
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full appearance-none"
+              />
+            </div>
+          </div>
           <div className="mt-6">
             <label
               htmlFor="details"

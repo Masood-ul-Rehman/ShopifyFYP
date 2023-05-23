@@ -20,6 +20,9 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    shortdesc: {
+      type: String,
+    },
     price: {
       type: Number,
       required: [true, "Please enter product price"],
