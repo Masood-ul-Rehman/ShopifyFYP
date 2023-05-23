@@ -24,10 +24,7 @@ const productSchema = mongoose.Schema(
       type: Number,
       required: [true, "Please enter product price"],
     },
-    category: {
-      type: String,
-      required: true,
-    },
+
     quantity: {
       type: Number,
       required: true,
@@ -36,7 +33,7 @@ const productSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
-    colors: {},
+    colors: { type: String },
 
     image: {
       data: Buffer,

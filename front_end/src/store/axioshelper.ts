@@ -6,10 +6,11 @@ const axiosInstance = axios.create({
   },
 });
 const addBearerToken = (config: any) => {
-  let token = localStorage.getItem("token"); // Retrieve the token from wherever you store it (e.g., localStorage, Redux store, etc.)
+  let token = localStorage.getItem("token");
   if (token) {
     config.headers = {
       ...config.headers,
+      "Content-Type": "multipart/form-data;",
       Authorization: `Bearer ${token}`,
     };
   }

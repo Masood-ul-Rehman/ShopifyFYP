@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosInstance from "../../axioshelper";
 const API_URL = "http://localhost:5000/api/product";
 
@@ -11,10 +10,8 @@ const addnewProduct = async (data) => {
     ...data,
   };
   console.log(JSON.stringify(fdata));
-  const response = await axios.post(
-    `${API_URL}/addProduct`,
-    JSON.stringify(fdata)
-  );
+
+  const response = await axiosInstance.post(`${API_URL}/addProduct`, fdata);
 
   return response.data;
 };

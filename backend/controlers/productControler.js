@@ -34,25 +34,19 @@ const addProduct = asyncHandler(async (req, res) => {
       quantity,
       sold,
       colors,
+      image: { data: req.file.filename },
     });
-    const images = req.files.map((file) => {
-      newProduct.User = User;
+    if (req.file) {
       newProduct.image = {
-        filename: file.filename,
-        path: file.path,
-        originalName: file.originalname,
+        data: req.file.filename,
       };
-    });
-    await Image.insertMany(images);
-    let names = {};
-    files.map((name, index) => {
-      names = { filename: name.filename };
-    });
+    }
     res.json(newProduct);
   } catch (error) {
     throw new Error(error);
   }
 });
+
 const updateProduct = asyncHandler(async (req, res) => {
   const { id } = req.params;
   try {

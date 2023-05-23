@@ -3,44 +3,25 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import { AddProductThnuk } from "../../../store";
-import { uploadMultiThunk } from "../../../store/thunks/uploadThunk";
-import { useSelector } from "react-redux";
-import { selectIsLoading } from "../../../store/slices/uploadImage/uploadSlice";
 function AddProduct() {
   const dispatch = useDispatch();
 
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    slug: "as",
+    slug: "",
     price: 0,
-    category: "",
     quantity: 0,
     color: "",
-    image: "",
+    image: null,
   });
-  const { title, description, price, category, quantity, color } = formData;
+  const { title, description, price, quantity, color } = formData;
 
-  const [multipleFiles, setMultipleFiles] = useState([]);
-  const handleMultipleFilesChange = (event) => {
-    setMultipleFiles(Array.from(event.target.files));
-  };
-  // const imageData = useSelector(multiUpload.names);
-  let imageData = useSelector((state) => state.uploadMulti.filenames);
+  const [selectedImage, setSelectedImage] = useState(null);
 
-  const handleImageChange = async (event) => {
-    setMultipleFiles(Array.from(event.target.files));
-    try {
-      const imageData = new FormData();
-      multipleFiles.forEach((file) => {
-        imageData.append("images", file);
-      });
-      console.log(multipleFiles);
-      dispatch(uploadMultiThunk(imageData));
-      console.log("Files uploaded successfully");
-    } catch (error) {
-      console.error("Error uploading files:", error);
-    }
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(file);
   };
 
   const onChange = (e) => {
@@ -53,7 +34,7 @@ function AddProduct() {
     e.preventDefault();
     setFormData((state) => ({
       ...state,
-      image: imageData,
+      image: selectedImage,
     }));
     console.log(formData);
     dispatch(AddProductThnuk(formData));
@@ -146,24 +127,6 @@ function AddProduct() {
               />
             </div>
           </div>
-          <div className="flex w-full mt-6">
-            <div className="w-1/2 ">
-              <label
-                htmlFor="title"
-                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
-              >
-                Category
-              </label>
-              <input
-                type="text"
-                id="category"
-                name="category"
-                value={category}
-                onChange={onChange}
-                className="no-button-increment form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full appearance-none"
-              />
-            </div>
-          </div>
 
           <div className="mt-6">
             <label
@@ -185,15 +148,7 @@ function AddProduct() {
             </textarea>
           </div>
           <div className="mt-16 relative">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleMultipleFilesChange}
-              multiple="multiple"
-            />
-            <button onClick={handleImageChange} className="bg-red text-white">
-              Upload images
-            </button>
+            <input type="file" accept="image/*" onChange={handleImageChange} />
           </div>
 
           <Button type="submit" semiRounded simpleBlack styles="mt-10">

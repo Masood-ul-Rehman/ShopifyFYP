@@ -15,7 +15,7 @@ const upload = multer({ dest: "uploads/" });
 
 const router = express.Router();
 
-router.post("/addProduct", protect, upload.array("image"), addProduct);
+router.post("/addProduct", protect, upload.single("image"), addProduct);
 router.post("/upload");
 router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
