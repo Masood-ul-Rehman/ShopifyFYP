@@ -129,7 +129,7 @@ function AddProduct() {
             </div>
           </div>
           <div className="flex w-full mt-6">
-            <div className="w-1/2 ">
+            <div className="w-full">
               <label
                 htmlFor="stock"
                 className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"

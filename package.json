@@ -12,6 +12,7 @@
   "author": "Masood ul Rehman",
   "license": "ISC",
   "dependencies": {
+    "@tanstack/react-query": "^4.29.7",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "child_process": "^1.0.2",
