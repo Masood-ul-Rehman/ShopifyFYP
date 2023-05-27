@@ -16,14 +16,6 @@ const addnewProduct = async (data) => {
   return response.data;
 };
 
-// const addnewProduct = async (data: inputData) => {
-//   const fdata = {
-//     User,
-//     ...data,
-//   };
-//   const response = await axiosInstance.post(`${API_URL}addProduct`, fdata);
-//   return response.data;
-// };
 const updateProduct = async (id, data) => {
   const response = await axiosInstance.put(`${API_URL}/${id}`, data);
 };
