@@ -8,7 +8,7 @@ var bodyParser = require("body-parser");
 
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-
+("");
 connectDB();
 
 const app = express();
@@ -21,14 +21,14 @@ app.use(express.json());
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("../uploads"));
+app.use("../images", express.static("images"));
 
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/create", require("./routes/detailsRoutes"));
 app.use("/api/product", require("./routes/productRoutes"));
 app.use("/api/complete", require("./routes/completeSetupRoutes"));
 app.use("/api/image", require("./routes/imageRoutes"));
-app.use("/api/order", require("./routes/imageRoutes"));
+app.use("/api/order", require("./routes/orderRoutes"));
 
 // Serve frontend
 if (process.env.NODE_ENV === "production") {

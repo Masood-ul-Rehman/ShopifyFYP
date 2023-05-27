@@ -9,9 +9,21 @@ const {
   addToWishlist,
   rating,
 } = require("../controlers/productControler");
+const { v4: uuidv4 } = require("uuid");
+
 const { protect } = require("../middleware/authmiddleware");
 const multer = require("multer");
-const upload = multer({ dest: "uploads/" });
+// const upload = multer({ dest: "uploads/" });
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images/");
+  },
+  filename: (req, file, cb) => {
+    const fileName = file.originalname.toLowerCase().split(" ").join("-");
+    cb(null, uuidv4() + "-" + fileName);
+  },
+});
+const upload = multer({ storage: storage });
 
 const router = express.Router();
 

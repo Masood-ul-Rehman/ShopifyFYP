@@ -77,7 +77,7 @@ function Products() {
                     </div>
 
                     <div className="btns flex">
-                      <Link to="/updateproduct">
+                      <Link to="/updateproduct" state={detail}>
                         <Button semiRounded encourage>
                           Update
                         </Button>
