@@ -21,6 +21,7 @@ app.use(express.json());
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("../uploads"));
 
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/create", require("./routes/detailsRoutes"));

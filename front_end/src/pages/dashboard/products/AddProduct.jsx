@@ -166,7 +166,12 @@ function AddProduct() {
             </textarea>
           </div>
           <div className="mt-16 relative">
-            <input type="file" accept="image/*" onChange={handleImageChange} />
+            <input
+              type="file"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
           </div>
 
           <Button type="submit" semiRounded simpleBlack styles="mt-10">

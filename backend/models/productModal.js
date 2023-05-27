@@ -39,9 +39,10 @@ const productSchema = mongoose.Schema(
     colors: { type: String },
 
     image: {
-      data: Buffer,
+      data: String,
       contentType: String,
     },
+
     ratings: [
       {
         star: Number,

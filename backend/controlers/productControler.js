@@ -23,7 +23,7 @@ const addProduct = asyncHandler(async (req, res) => {
     if (req.body.title) {
       req.body.slug = slugify(req.body.title);
     }
-
+    console.log(req.file);
     const createdSlug = slugify(req.body.title);
     const newProduct = await Product.create({
       User,
@@ -36,11 +36,12 @@ const addProduct = asyncHandler(async (req, res) => {
       quantity,
       sold,
       colors,
-      image: { data: req.file.filename },
+      image: { data: req.file.filename, contentType: req.file.mimetype },
     });
     if (req.file) {
       newProduct.image = {
         data: req.file.filename,
+        contentType: req.file.mimetype,
       };
     }
     res.json(newProduct);
@@ -76,7 +77,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
       // Product not found
       return res.status(404).json({ error: "Product not found" });
     }
-    res.json(deleteProduct);
+    res.json("Product deleted ");
   } catch (error) {
     throw new Error(error);
   }
@@ -101,7 +102,7 @@ const getAllProduct = asyncHandler(async (req, res) => {
     // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
     // let query = Product.find(JSON.parse(queryStr));
-    const userProducts = await Product.find({ User: req.body.User }).exec();
+    const userProducts = await Product.find(req.body.User);
     res.json(userProducts);
 
     // // Sorting
