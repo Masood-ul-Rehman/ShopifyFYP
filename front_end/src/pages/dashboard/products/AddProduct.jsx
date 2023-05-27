@@ -137,7 +137,7 @@ function AddProduct() {
                 Short Description
               </label>
               <input
-                type="number"
+                type="text"
                 id="shortdesc"
                 name="shortdesc"
                 value={shortdesc}

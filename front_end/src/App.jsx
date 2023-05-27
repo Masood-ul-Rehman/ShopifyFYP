@@ -9,6 +9,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import ResetPassword from "./pages/ResetPassword";
 import CreateWebsite from "./pages/CreateWebsite";
+import ChooseTheme from "./pages/ChooseTheme";
 import Layout from "./components/logedinuser/Layout";
 import Dashboradd from "./pages/dashboard/Dashboradd";
 import Products from "./pages/dashboard/products/Products";
@@ -38,6 +39,7 @@ function App() {
               <Route path="/resetpassword" element={<ResetPassword />} />
               <Route path="/createstore" element={<Createnewstore />} />
               <Route path="/create" element={<CreateWebsite />} />
+              <Route path="/selectionTheme" element={<ChooseTheme />} />
               <Route path="/" element={<Layout />}>
                 <Route index element={<Dashboradd />} />
                 <Route path="products" element={<Products />} />
