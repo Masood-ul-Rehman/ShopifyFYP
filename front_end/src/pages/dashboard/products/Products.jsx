@@ -3,8 +3,13 @@ import { Link } from "react-router-dom";
 import Carditem from "./Carditem";
 import DATA from "./Data";
 import Button from "../../../components/Button";
-
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../../../api/product";
 function Products() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["getProducts"],
+    queryFn: getProducts,
+  });
   return (
     <div>
       <div className="py-4">
@@ -22,7 +27,7 @@ function Products() {
       </div>
       <div>
         <div className="mt-6">
-          {DATA.map((item) => {
+          {data?.map((item) => {
             return <Carditem key={item.id} detail={item}></Carditem>;
           })}
         </div>
