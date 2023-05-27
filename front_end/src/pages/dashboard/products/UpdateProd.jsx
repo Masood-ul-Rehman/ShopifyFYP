@@ -1,18 +1,23 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
+import { useLocation } from "react-router";
 
+function Updateprod({ detail }) {
+  const data = useLocation();
 
-
-function Updateprod() {
-
-    //this data will be obtained from the store using redux
+  //this data will be obtained from the store using redux
   const [formData, setFormData] = useState({
-    title: "get from the store...",
-    shortDesc: "get from the store...",
-    price: 122,
-    discount: 3,
+    title: data?.state?.title,
+    description: data?.state?.description,
+    shortdesc: data?.state?.shortdesc,
+    slug: "",
+    price: data?.state?.price,
+    quantity: data?.state?.quantity,
+    color: data?.state?.color,
+    image: null,
   });
+  console.log(detail);
   const { title, shortDesc, price, discount } = formData;
 
   const [selectedImage, setSelectedImage] = useState(null);

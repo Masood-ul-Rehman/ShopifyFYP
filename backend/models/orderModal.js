@@ -23,4 +23,4 @@ const orderSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-module.exports = mongoose.model("user", orderSchema);
+module.exports = mongoose.model("order", orderSchema);
