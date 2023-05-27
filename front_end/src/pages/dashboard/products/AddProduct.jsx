@@ -1,10 +1,40 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import { AddProductThnuk } from "../../../store";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function AddProduct() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {isError, isSuccess} = useSelector((state) => state.product);
+
+  useEffect(()=>{
+    if(isSuccess){
+      setFormData({
+        title: "",
+        description: "",
+        shortdesc: "",
+        slug: "",
+        price: 0,
+        quantity: 0,
+        color: "",
+        image: null,
+      })
+      toast.success('Successfully added product!', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+      navigate("/products");
+    }
+
+    if(isError){
+      toast.error('error in adding the product', {
+        position: toast.POSITION.TOP_RIGHT
+      });
+    }
+  }, [isError, isSuccess])
 
   const [formData, setFormData] = useState({
     title: "",

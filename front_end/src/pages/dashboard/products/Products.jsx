@@ -6,8 +6,10 @@ import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../../api/product";
 import { useMutation } from "@tanstack/react-query";
 import { deleteProduct } from "../../../api/product";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Products() {
-  const { isLoading, isError, data, error, refetch } = useQuery({
+  const { isLoading, isSuccess, isError, data, error, refetch } = useQuery({
     queryKey: ["getProducts"],
     queryFn: getProducts,
   });
@@ -17,8 +19,19 @@ function Products() {
   const handelDelete = (id) => {
     deletePost.mutate(id);
     refetch("getProducts");
+      // .then(() => {
+      //   toast.success("Success Notification !", {
+      //     position: toast.POSITION.TOP_RIGHT,
+      //   });
+      //   refetch("getProducts");
+      // })
+      // .catch((error) => {
+      //   toast.error("Error deleting:", error, {
+      //     position: toast.POSITION.TOP_RIGHT,
+      //   });
+      // });
   };
-  console.log(data);
+
   return (
     <div>
       <div className="py-4">
