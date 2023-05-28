@@ -38,13 +38,8 @@ const addProduct = asyncHandler(async (req, res) => {
       colors,
       image: { data: req.file.filename, contentType: req.file.mimetype },
     });
-    if (req.file) {
-      newProduct.image = {
-        data: req.file.filename,
-        contentType: req.file.mimetype,
-      };
-    }
-    res.json(newProduct);
+
+    res.json("Productuct added");
   } catch (error) {
     throw new Error(error);
   }
