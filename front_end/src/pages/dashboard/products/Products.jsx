@@ -19,17 +19,14 @@ function Products() {
   const handelDelete = (id) => {
     deletePost.mutate(id);
     refetch("getProducts");
-      // .then(() => {
-      //   toast.success("Success Notification !", {
-      //     position: toast.POSITION.TOP_RIGHT,
-      //   });
-      //   refetch("getProducts");
-      // })
-      // .catch((error) => {
-      //   toast.error("Error deleting:", error, {
-      //     position: toast.POSITION.TOP_RIGHT,
-      //   });
-      // });
+
+    //   refetch("getProducts");
+    // })
+    // .catch((error) => {
+    //   toast.error("Error deleting:", error, {
+    //     position: toast.POSITION.TOP_RIGHT,
+    //   });
+    // });
   };
 
   return (
@@ -61,53 +58,53 @@ function Products() {
           ) : (
             data?.data.map((detail) => {
               return (
-                <>
-                  {" "}
-                  <div className="flex flex-row px-4 py-2 mb-4 shadow-[0_0_10px_rgba(0,0,0,0.10)] rounded-lg items-center justify-between">
-                    <div className="flex items-center">
-                      <div className="img w-40 h-auto rounded">
-                        <img
-                          src={`http://localhost:5000/uploads/${detail.image.data}`}
-                          alt="prod"
-                        />
-                      </div>
-                      <div className="product-details flex flex-col ml-8">
-                        <h3 className="font-poppins text-xl text-neutral-800">
-                          {detail.title}
-                        </h3>
-                        <h6 className="font-poppins text-base text-neutral-800">
-                          ${detail.price}
-                        </h6>
-                        <p className="font-poppins font-medium text-base text-neutral-800 pt-4">
-                          availability:{" "}
-                          <span className="font-light">
-                            {detail.quantity > 0
-                              ? detail.quantity
-                              : "not available"}
-                          </span>
-                        </p>
-                      </div>
+                <div
+                  key={detail._id}
+                  className="flex flex-row px-4 py-2 mb-4 shadow-[0_0_10px_rgba(0,0,0,0.10)] rounded-lg items-center justify-between"
+                >
+                  <div className="flex items-center">
+                    <div className="img w-40 h-auto rounded">
+                      <img
+                        src={`http://localhost:5000/images/${detail.image.data}`}
+                        alt="prod"
+                      />
                     </div>
-
-                    <div className="btns flex">
-                      <Link to="/updateproduct" state={detail}>
-                        <Button semiRounded encourage>
-                          Update
-                        </Button>
-                      </Link>
-                      <Button
-                        semiRounded
-                        danger
-                        styles="ml-6"
-                        onClick={() => {
-                          handelDelete(detail._id);
-                        }}
-                      >
-                        Delete
-                      </Button>
+                    <div className="product-details flex flex-col ml-8">
+                      <h3 className="font-poppins text-xl text-neutral-800">
+                        {detail.title}
+                      </h3>
+                      <h6 className="font-poppins text-base text-neutral-800">
+                        ${detail.price}
+                      </h6>
+                      <p className="font-poppins font-medium text-base text-neutral-800 pt-4">
+                        availability:{" "}
+                        <span className="font-light">
+                          {detail.quantity > 0
+                            ? detail.quantity
+                            : "not available"}
+                        </span>
+                      </p>
                     </div>
                   </div>
-                </>
+
+                  <div className="btns flex">
+                    <Link to="/updateproduct" state={detail}>
+                      <Button semiRounded encourage>
+                        Update
+                      </Button>
+                    </Link>
+                    <Button
+                      semiRounded
+                      danger
+                      styles="ml-6"
+                      onClick={() => {
+                        handelDelete(detail._id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
               );
             })
           )}
