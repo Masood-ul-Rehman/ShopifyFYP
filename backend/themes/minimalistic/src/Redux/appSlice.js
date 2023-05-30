@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import "../axios";
+import axiosInstance from "../axios";
 
 export const searchBarFunction = createAsyncThunk(
    "products/search",
@@ -34,17 +35,22 @@ export const getProductsInCategories = createAsyncThunk(
 );
 
 export const getItems = createAsyncThunk("products/fetch", async () => {
-   const { data } = await axios.get("/products");
+   const { data } = await axiosInstance.get("http://localhost:5000/api/product");
    return data;
 });
 
 export const getSingleItem = createAsyncThunk(
    "products/getSingleItem",
    async (id) => {
-      const { data } = await axios.get(`/products/single/${id}`);
+      const { data } = await axiosInstance.get(`http://localhost:5000/api/product/${id}`);
       return data;
    }
 );
+
+// export const getProducts = createAsyncThunk(('product/get', async () => {
+//    const { data } = await axios.get('http://localhost:5000/api/product');
+//    return data;
+// }))
 
 export const appSlice = createSlice({
    name: "app",
