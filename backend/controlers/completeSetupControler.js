@@ -8,13 +8,17 @@ const { v4: uuidv4 } = require("uuid");
 const completeSetup = asyncHandler(async (req, res) => {
   try {
     const { User, theme } = req.body;
-    var userId = uuidv4();
+    var storeId = uuidv4();
 
     const setup = await template.create({
       User,
       theme,
-      user_id: userId,
+      store_id: storeId,
     });
+    const UserData = {
+      User: User,
+      storeId: storeId,
+    };
 
     const templateDirectory = path.join(__dirname, "..", "themes", theme);
     // console.log(templateDirectory);
@@ -23,20 +27,30 @@ const completeSetup = asyncHandler(async (req, res) => {
     }
 
     // Create a directory with the user's unique identifier to store their app
-    var userDirectory = path.join(__dirname, "..", "..", "user_apps", userId);
-
+    var userDirectory = path.join(__dirname, "..", "..", "user_apps", storeId);
+    var fileName = "storeData.json";
+    var filePath = `${userDirectory}/${fileName}`;
     setup.websiteLocation = userDirectory;
     console.log(userDirectory);
     fse.cp(templateDirectory, userDirectory, { recursive: true }, (err) => {
       if (err) {
-        console.log(err);
+        throw new Error(err);
+      } else {
+        fs.writeFile(filePath, JSON.stringify(UserData), (err) => {
+          if (err) {
+            console.error("An error occurred while creating the file:", err);
+            throw new Error(err);
+          } else {
+            console.log("File created successfully!");
+          }
+        });
       }
     });
   } catch (error) {
     throw new Error(error);
   }
 
-  res.json({ userId });
+  res.json({ storeId });
 });
 
 module.exports = {
