@@ -148,6 +148,7 @@ export const appSlice = createSlice({
          state.pending = false;
          state.error = false;
          state.singleItem = action.payload;
+         console.log(action.payload, "thi is the payload")
       },
       [getSingleItem.rejected]: (state, action) => {
          state.pending = false;

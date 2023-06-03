@@ -12,6 +12,7 @@ import classNames from "classnames";
 import { addToCart } from "../../Redux/cartSlice";
 import { openSnackBar } from "../../Redux/appSlice";
 import clsx from 'clsx';
+import { useNavigate } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -47,6 +48,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SingleProduct = () => {
+   const navigate = useNavigate();
    const { singleItem } = useSelector((state) => state.app);
    const { pending, error } = useSelector((state) => state.cart);
    const user = useSelector((state) => state.user.user);
@@ -55,9 +57,13 @@ const SingleProduct = () => {
    const { title, price, description, quantity, sold, image: {data}, _id } = singleItem;
    const dispatch = useDispatch();
 
+   console.log(singleItem, "this is the single item");
+
    const handleClick = () => {
       if (!user) {
          dispatch(openSnackBar({ severity: "error", text: "Please Log In" }));
+         navigate("/login")
+
       } else {
          dispatch(addToCart(_id));
          if (!error && !pending) {
@@ -79,6 +85,7 @@ const SingleProduct = () => {
    };
 
    return (
+      // <h1>hello</h1>
       <Grid container className={classes.container}>
          <Grid item xs={12} sm={4}>
             <div className={classes.imgContainer}>

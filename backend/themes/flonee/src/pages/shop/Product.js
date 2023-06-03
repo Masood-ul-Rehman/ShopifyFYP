@@ -23,10 +23,10 @@ const Product = ({ location, product }) => {
         />
       </MetaTags>
 
-      <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
+      {/* <BreadcrumbsItem to={process.env.PUBLIC_URL + "/"}>Home</BreadcrumbsItem>
       <BreadcrumbsItem to={process.env.PUBLIC_URL + pathname}>
         Shop Product
-      </BreadcrumbsItem>
+      </BreadcrumbsItem> */}
 
       <LayoutOne headerTop="visible">
         {/* breadcrumb */}

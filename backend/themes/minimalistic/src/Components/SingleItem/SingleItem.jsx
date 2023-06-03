@@ -42,7 +42,11 @@ const SingleItem = ({ item }) => {
                />
                <CardContent>
                   <Typography gutterBottom variant="body1" component="h4">
-                     {title.substring(0, 50)}
+                     {title}
+                  </Typography>
+
+                  <Typography gutterBottom variant="body1" component="h4">
+                     {title}
                   </Typography>
                   <Typography
                      variant="body2"

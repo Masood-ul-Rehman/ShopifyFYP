@@ -39,7 +39,14 @@ const ItemList = () => {
    const navigate = useNavigate();
    return (
       <>
-         {!pending && items.length > 0 ? (
+         
+         {
+         pending ? (
+            <Grid className={classes.container} container>
+               <CircularProgress size="5rem" />
+            </Grid>
+         ):
+         !pending && items.length > 0 ? (
             <Grid
                className={classes.container}
                container
