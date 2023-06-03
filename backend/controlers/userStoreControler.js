@@ -2,6 +2,8 @@ const asyncHandler = require("express-async-handler");
 const UserWebsite = require("../models/templateModal");
 const { exec } = require("child_process");
 const path = require("path");
+const { EventEmitter } = require("events");
+let childProcess;
 
 const getUserStores = asyncHandler(async (req, res) => {
   const { id } = req.params;
@@ -14,22 +16,13 @@ const startStore = asyncHandler(async (req, res) => {
   const { id } = req.params;
   console.log(id);
   const folderPath = path.join(__dirname, "..", "..", "user_apps", id);
-  const command = `http-server --cors -c-1`;
+  const command = `http-server -p 3010 --cors -c-1`;
   const options = { cwd: folderPath };
+  childProcess = exec(command, options);
 
-  const childProcess = exec(command, options);
   childProcess.stdout.on("data", (data) => {
     console.log(`stdout: ${data}`);
   });
-  childProcess.stdout.on("data", (data) => {
-    console.log(`stdout: ${data}`);
-    const portMatch = data.match(/http:\/\/localhost:(\d+)/);
-    if (portMatch && portMatch[1]) {
-      const port = portMatch[1];
-      res.json(`${port}`);
-    }
-  });
-
   // Handle the stderr output
   childProcess.stderr.on("data", (data) => {
     console.error(`stderr: ${data}`);
@@ -39,7 +32,15 @@ const startStore = asyncHandler(async (req, res) => {
   childProcess.on("exit", (code) => {
     console.log(`Child process exited with code ${code}`);
   });
-
-  res.send(`Starting http-server for folder ID: ${id}`);
+  res.json("server started");
 });
-module.exports = { getUserStores, startStore };
+const stopStore = asyncHandler(async (req, res) => {
+  if (childProcess) {
+    childProcess.kill(); // Kill the child process
+    res.send("Server stopped successfully");
+  } else {
+    res.send("Server is not running");
+  }
+});
+
+module.exports = { getUserStores, startStore, stopStore };
