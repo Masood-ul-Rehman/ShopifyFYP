@@ -11,6 +11,7 @@ import {
 import classNames from "classnames";
 import { addToCart } from "../../Redux/cartSlice";
 import { openSnackBar } from "../../Redux/appSlice";
+import clsx from 'clsx';
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -40,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
    letterSpace: {
       letterSpacing: 2.5,
    },
+   marginLeftTwo:{
+      marginLeft: "2rem",
+   }
 }));
 
 const SingleProduct = () => {
@@ -48,7 +52,7 @@ const SingleProduct = () => {
    const user = useSelector((state) => state.user.user);
 
    const classes = useStyles();
-   const { title, price, description, category, image, _id } = singleItem;
+   const { title, price, description, quantity, sold, image: {data}, _id } = singleItem;
    const dispatch = useDispatch();
 
    const handleClick = () => {
@@ -78,7 +82,7 @@ const SingleProduct = () => {
       <Grid container className={classes.container}>
          <Grid item xs={12} sm={4}>
             <div className={classes.imgContainer}>
-               <img src={image} alt={title} className={classes.img} />
+               <img src={`http://localhost:5000/images/${data}`} alt={title} className={classes.img} />
             </div>
          </Grid>
          <Grid item xs={12} sm={6}>
@@ -86,11 +90,7 @@ const SingleProduct = () => {
                {title}
             </Typography>
 
-            <Chip
-               label={category}
-               variant="outlined"
-               className={classes.marginTopTwo}
-            />
+            
             <Typography
                className={classNames(classes.paleText, classes.marginTopTwo)}
                variant="body1"
@@ -98,8 +98,17 @@ const SingleProduct = () => {
                {description}
             </Typography>
             <Typography className={classes.marginTopTwo} variant="subtitle2">
-               ${price}
+               <b>Price:</b>${price}
             </Typography>
+
+            <div style={{display: "flex"}}>
+            <Typography className={classes.marginTopTwo} variant="subtitle2">
+               <b>Available Stock:</b> {quantity}
+            </Typography>
+            <Typography className={clsx(classes.marginTopTwo, classes.marginLeftTwo)} variant="subtitle2">
+               <b>Item sold:</b> {sold}
+            </Typography>
+            </div>
 
             <Button
                className={classNames(classes.letterSpace, classes.marginTopTwo)}

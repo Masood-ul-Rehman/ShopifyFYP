@@ -35,14 +35,14 @@ const SingleItem = ({ item }) => {
             <CardActionArea onClick={() => navigate(`/products/${_id}`)}>
                <CardMedia
                   className={classes.media}
-                  src={image}
+                  src={`http://localhost:5000/images/${item.image.data}`}
                   title={title}
                   component="img"
                   loading="lazy"
                />
                <CardContent>
                   <Typography gutterBottom variant="body1" component="h4">
-                     {title.substring(0, 20)}...
+                     {title.substring(0, 50)}
                   </Typography>
                   <Typography
                      variant="body2"

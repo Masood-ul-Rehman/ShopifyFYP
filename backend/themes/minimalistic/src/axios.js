@@ -1,13 +1,22 @@
 import axios from "axios";
-axios.defaults.baseURL = "https://bitter-hill-3387.fly.dev/api";
-// axios.defaults.baseURL = "http://localhost:8080/api";
-axios.interceptors.request.use(function (req) {
-   const user = localStorage.getItem("user");
 
-   if (user) {
-      const { token } = JSON.parse(localStorage.getItem("user"));
-      req.headers.authorization = `Bearer ${token}`;
-      return req;
-   }
-   return req;
+const axiosInstance = axios.create({
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
 });
+const addBearerToken = (config) => {
+  let token = localStorage.getItem("token");
+  if (token) {
+    config.headers = {
+      ...config.headers,
+      "Content-Type": "multipart/form-data;",
+      Authorization: `Bearer ${token}`,
+    };
+  }
+  return config;
+};
+axiosInstance.interceptors.request.use(addBearerToken, (error) => {
+  return Promise.reject(error);
+});
+export default axiosInstance;
