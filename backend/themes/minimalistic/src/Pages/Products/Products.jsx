@@ -7,7 +7,7 @@ const Products = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(getCategories());
+      // dispatch(getCategories());
       dispatch(getItems());
    }, [dispatch]);
    return (
