@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getStores, startStore } from "../../api/stores";
 import NoStore from "./noStorefound";
-import useEffect from "react";
+import { useEffect } from "react";
 const Stores = ({ refetchState }) => {
   const {
     data,

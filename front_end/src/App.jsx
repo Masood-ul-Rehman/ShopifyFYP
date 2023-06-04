@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import "./index.css";
-import useState from "react";
+import { useState } from "react";
 // react redux
 import { useSelector } from "react-redux";
 import Stores from "./pages/store/stores";
