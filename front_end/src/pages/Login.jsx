@@ -29,7 +29,7 @@ function Login() {
     }
 
     if (isSuccess || user) {
-      navigate("/createstore");
+      navigate("/");
     }
 
     dispatch(reset());

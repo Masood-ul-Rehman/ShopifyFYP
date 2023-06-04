@@ -1,15 +1,71 @@
 const asyncHandler = require("express-async-handler");
-const UserWebsite = require("../models/templateModal");
 const { exec } = require("child_process");
 const path = require("path");
-const { EventEmitter } = require("events");
+const storeSchema = require("../models/storeModal");
+const fs = require("fs");
+const fse = require("fs-extra");
+const { v4: uuidv4 } = require("uuid");
 let childProcess;
 
 const getUserStores = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
-  const Website = await UserWebsite.find({ User: id });
-  res.json({ Website });
+  const Website = await storeSchema.find({ User: id });
+  res.json(Website);
+});
+const createStore = asyncHandler(async (req, res) => {
+  try {
+    const { User, name, type, theme } = req.body;
+    var storeId = uuidv4();
+
+    if (!User | !name | !type | !theme) {
+      res.status(400);
+      throw new Error("Please add all fields");
+    }
+    if ((!User, !theme)) {
+      throw new Error(" Please fill all fields");
+    }
+    var storeId = uuidv4();
+    const templateDirectory = path.join(__dirname, "..", "themes", theme);
+    if (!fs.existsSync(templateDirectory)) {
+      return res.status(404).json({ error: "Template not found" });
+    }
+    const setup = await storeSchema.create({
+      User,
+      name,
+      type,
+      theme,
+      store_id: storeId,
+    });
+    const UserData = {
+      User: User,
+      storeId: storeId,
+    };
+    // Create a directory with the user's unique identifier to store their app
+    var userDirectory = path.join(__dirname, "..", "..", "user_apps", storeId);
+    var fileName = "storeData.json";
+    var filePath = `${userDirectory}/${fileName}`;
+    setup.websiteLocation = userDirectory;
+    console.log(userDirectory);
+    fse.cp(templateDirectory, userDirectory, { recursive: true }, (err) => {
+      if (err) {
+        throw new Error(err);
+      } else {
+        fs.writeFile(filePath, JSON.stringify(UserData), (err) => {
+          if (err) {
+            console.error("An error occurred while creating the file:", err);
+            throw new Error(err);
+          } else {
+            console.log("File created successfully!");
+          }
+        });
+      }
+    });
+
+    res.json(storeId);
+  } catch (error) {
+    throw new Error(error);
+  }
 });
 
 const startStore = asyncHandler(async (req, res) => {
@@ -43,4 +99,9 @@ const stopStore = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { getUserStores, startStore, stopStore };
+module.exports = {
+  getUserStores,
+  createStore,
+  startStore,
+  stopStore,
+};
