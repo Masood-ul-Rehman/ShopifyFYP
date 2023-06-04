@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Carditem from "./Carditem";
 import Button from "../../../components/Button";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../../../api/product";
 import { useMutation } from "@tanstack/react-query";
 import { deleteProduct } from "../../../api/product";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 function Products() {
   const { isLoading, isSuccess, isError, data, error, refetch } = useQuery({
@@ -19,14 +17,16 @@ function Products() {
   const handelDelete = (id) => {
     deletePost.mutate(id);
     refetch("getProducts");
-
-    //   refetch("getProducts");
-    // })
-    // .catch((error) => {
-    //   toast.error("Error deleting:", error, {
-    //     position: toast.POSITION.TOP_RIGHT,
-    //   });
-    // });
+    if (isError) {
+      toast.error("Error deleting:", error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
+    if (isSuccess) {
+      toast.success("Deleted succefully:", error, {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+    }
   };
 
   return (

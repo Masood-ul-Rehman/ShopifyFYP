@@ -1,10 +1,18 @@
 const mongoose = require("mongoose");
-const templateSchema = mongoose.Schema(
+const storeSchema = mongoose.Schema(
   {
     User: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "user",
+    },
+    name: {
+      type: String,
+      required: [true, "Please enter Name of your Business"],
+    },
+    type: {
+      type: String,
+      required: [true, "Business type"],
     },
     theme: {
       type: String,
@@ -22,4 +30,4 @@ const templateSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-module.exports = mongoose.model("template", templateSchema);
+module.exports = mongoose.model("storeDetails", storeSchema);

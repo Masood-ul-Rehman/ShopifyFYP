@@ -1,13 +1,10 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import HeaderLoged from "../components/logedinuser/HeaderLoged";
-import Layout from "../components/logedinuser/Layout";
-import Dashboardd from "./dashboard/Dashboradd";
-import Button from "../components/Button";
-import { toast } from "react-toastify";
 
-const Createnewstore = () => {
+import Button from "../../components/Button";
+
+const NoStore = () => {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
@@ -23,16 +20,7 @@ const Createnewstore = () => {
       <Link to={"/create"}>
         <Button primaryGrad>Create a store</Button>
       </Link>
-
-      <p className="font-poppins text-base font-light text-neutral-800 mt-2">
-        Already have a store?
-        <Link to={"/"}>
-          <span className="text-purplish hover:text-opacity-80">
-            Go to dashbaord
-          </span>
-        </Link>{" "}
-      </p>
     </div>
   );
 };
-export default Createnewstore;
+export default NoStore;
