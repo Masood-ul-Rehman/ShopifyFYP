@@ -1,41 +1,36 @@
-import axiosInstance from "../axios"
+import axios from "axios"
 
 export const FETCH_PRODUCTS_SUCCESS = "FETCH_PRODUCTS_SUCCESS";
+export const FETCH_SINGLE_PRODUCT_SUCCESS = "FETCH_SINGLE_PRODUCT_SUCCESS";
+export const FETCH_SINGLE_PRODUCT_REQUEST = 'FETCH_SINGLE_PRODUCT_SUCCESS';
+export const FETCH_SINGLE_PRODUCT_FAILURE = 'FETCH_SINGLE_PRODUCT_FAILURE';
 
-const fetchProductsSuccess = products => ({
-  type: FETCH_PRODUCTS_SUCCESS,
-  payload: products
-});
+// const fetchProductsSuccess = products => ({
+//   type: FETCH_PRODUCTS_SUCCESS,
+//   payload: products
+// });
 
-// fetch products
+// // fetch products
 // export const fetchProducts = products => {
 //   return dispatch => {
 //     dispatch(fetchProductsSuccess(products));
 //   };
 // };
 
-
 export const fetchProducts = () => {
-  return dispatch => {
-    // Dispatch an action to indicate that fetching has started (optional)
-    dispatch({ type: "FETCH_PRODUCTS_START" });
 
-    // Make the API call using Axios
-    axiosInstance
-      .get("http://localhost:5000/api/product")
-      .then(response => {
-        // Dispatch the success action with the received products
-        dispatch(fetchProductsSuccess(response.data));
-      })
-      .catch(error => {
-        // Handle any errors and dispatch an error action (optional)
-        dispatch({ type: "FETCH_PRODUCTS_ERROR", payload: error.message });
-      });
-  };
-};
+  return async function(dispatch, getState){
+    const response = await axios.get("http://localhost:5000/api/product");
+
+    dispatch({type: FETCH_PRODUCTS_SUCCESS, payload: response.data})
+  }
+  
+}
 
 
-
-
-
-
+export const fetchSingleProduct = (id) => {
+  return async function(dispatch, getState){
+    const response = await axios.get(`http://localhost:5000/api/product/${id}`);
+    dispatch({type: FETCH_SINGLE_PRODUCT_SUCCESS, payload: response.data})
+  }
+}

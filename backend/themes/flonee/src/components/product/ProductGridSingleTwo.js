@@ -48,13 +48,13 @@ const ProductGridSingleTwo = ({
             <div onClick={handleOpenModal} style={{cursor: "pointer"}}>
               <img
                 className="default-img"
-                src={process.env.PUBLIC_URL + product.image[0]}
+                src={`http://localhost:5000/images/${product?.image?.data}`}
                 alt=""
               />
-              {product.image.length > 1 ? (
+              {product.image.data.length > 1 ? (
                 <img
                   className="hover-img"
-                  src={process.env.PUBLIC_URL + product.image[1]}
+                  src={`http://localhost:5000/images/${product?.image?.data}`}
                   alt=""
                 />
               ) : (
@@ -138,11 +138,9 @@ const ProductGridSingleTwo = ({
                 titlePriceClass ? titlePriceClass : ""
               }`}
             >
-              <h3>
-                <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
-                  {product.name}
-                </Link>
-              </h3>
+              <h4>
+                {product.title}
+              </h4>
               <div className="price-2">
                 {discountedPrice !== null ? (
                   <Fragment>

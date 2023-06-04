@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import MetaTags from "react-meta-tags";
 import { BreadcrumbsItem } from "react-breadcrumbs-dynamic";
 import { connect } from "react-redux";
@@ -8,10 +8,22 @@ import Breadcrumb from "../../wrappers/breadcrumb/Breadcrumb";
 import RelatedProductSlider from "../../wrappers/product/RelatedProductSlider";
 import ProductDescriptionTab from "../../wrappers/product/ProductDescriptionTab";
 import ProductImageDescription from "../../wrappers/product/ProductImageDescription";
-import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useLocation, useParams } from "react-router-dom";
+import { fetchSingleProduct } from "../../redux/actions/productActions";
 
-const Product = ({ location, product }) => {
+const Product = ({ location, product, singleProduct }) => {
+  const dispatch = useDispatch();
   const { pathname } = useLocation();
+  const {id} = useParams()
+  console.log(id, "the name of the path")
+
+
+  useEffect(() => {
+    dispatch(fetchSingleProduct(id))
+  }, [])
+
+  console.log(singleProduct, "single prod");
 
   return (
     <Fragment>
@@ -42,14 +54,14 @@ const Product = ({ location, product }) => {
         {/* product description tab */}
         <ProductDescriptionTab
           spaceBottomClass="pb-90"
-          productFullDesc={product.fullDescription}
+          productFullDesc={singleProduct.description}
         />
 
         {/* related product slider */}
-        <RelatedProductSlider
+        {/* <RelatedProductSlider
           spaceBottomClass="pb-95"
-          category={product.category[0]}
-        />
+          category={singleProduct.category[0]}
+        /> */}
       </LayoutOne>
     </Fragment>
   );
@@ -61,11 +73,8 @@ Product.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  const itemId = ownProps.match.params.id;
   return {
-    product: state.productData.products.filter(
-      (single) => single.id === itemId
-    )[0],
+    singleProduct: state.singleProduct.products,
   };
 };
 

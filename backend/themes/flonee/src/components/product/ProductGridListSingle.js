@@ -27,6 +27,10 @@ const ProductGridListSingle = ({
     discountedPrice * currency.currencyRate
   ).toFixed(2);
 
+  const handleOpenModal = () => {
+    setModalShow(true);
+  }
+
   return (
     <Fragment>
       <div
@@ -37,23 +41,23 @@ const ProductGridListSingle = ({
         <div
           className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
         >
-          <div className="product-img">
-            <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+          <div className="product-img"  onClick={handleOpenModal} style={{cursor: "pointer"}}>
+            
               <img
                 className="default-img"
-                src={process.env.PUBLIC_URL + product.image[0]}
+                src={`http://localhost:5000/images/${product?.image?.data}`}
                 alt=""
               />
-              {product.image.length > 1 ? (
+              {product.image.data.split(" ").length > 1 ? (
                 <img
                   className="hover-img"
-                  src={process.env.PUBLIC_URL + product.image[1]}
+                  src={`http://localhost:5000/images/${product?.image?.data}`}
                   alt=""
                 />
               ) : (
                 ""
               )}
-            </Link>
+            
             {product.discount || product.new ? (
               <div className="product-img-badges">
                 {product.discount ? (
@@ -93,7 +97,7 @@ const ProductGridListSingle = ({
                     Buy now{" "}
                   </a>
                 ) : product.variation && product.variation.length >= 1 ? (
-                  <Link to={`${process.env.PUBLIC_URL}/product/${product.id}`}>
+                  <Link to={`${process.env.PUBLIC_URL}/product/${product._id}`}>
                     Select Option
                   </Link>
                 ) : product.stock && product.stock > 0 ? (
@@ -130,11 +134,11 @@ const ProductGridListSingle = ({
           </div>
           <div className="product-content text-center">
             <h3>
-              <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
-                {product.name}
-              </Link>
+              <b onClick={handleOpenModal} style={{cursor: "pointer"}}>
+                {product.title}
+              </b>
             </h3>
-            {product.rating && product.rating > 0 ? (
+            {product.ratings ? (
               <div className="product-rating">
                 <Rating ratingValue={product.rating} />
               </div>
@@ -156,26 +160,26 @@ const ProductGridListSingle = ({
           </div>
         </div>
         <div className="shop-list-wrap mb-30">
-          <div className="row">
+          <div className="row" onClick={handleOpenModal}>
             <div className="col-xl-4 col-md-5 col-sm-6">
               <div className="product-list-image-wrap">
-                <div className="product-img">
-                  <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
+                <div className="product-img" onClick={handleOpenModal} style={{cursor: "pointer"}}>
+                  
                     <img
                       className="default-img img-fluid"
-                      src={process.env.PUBLIC_URL + product.image[0]}
+                      src={`http://localhost:5000/images/${product?.image?.data}`}
                       alt=""
                     />
-                    {product.image.length > 1 ? (
+                    {product.image.data.split(" ").length > 1 ? (
                       <img
                         className="hover-img img-fluid"
-                        src={process.env.PUBLIC_URL + product.image[1]}
+                        src={`http://localhost:5000/images/${product?.image?.data[1]}`}
                         alt=""
                       />
                     ) : (
                       ""
                     )}
-                  </Link>
+                  
                   {product.discount || product.new ? (
                     <div className="product-img-badges">
                       {product.discount ? (
@@ -194,9 +198,9 @@ const ProductGridListSingle = ({
             <div className="col-xl-8 col-md-7 col-sm-6">
               <div className="shop-list-content">
                 <h3>
-                  <Link to={process.env.PUBLIC_URL + "/product/" + product.id}>
-                    {product.name}
-                  </Link>
+                  <b onClick={handleOpenModal} style={{cursor: "pointer"}}>
+                    {product.title}
+                  </b>
                 </h3>
                 <div className="product-list-price">
                   {discountedPrice !== null ? (
@@ -221,8 +225,8 @@ const ProductGridListSingle = ({
                 ) : (
                   ""
                 )}
-                {product.shortDescription ? (
-                  <p>{product.shortDescription}</p>
+                {product.description ? (
+                  <p>{product.description}</p>
                 ) : (
                   ""
                 )}
@@ -240,7 +244,7 @@ const ProductGridListSingle = ({
                       </a>
                     ) : product.variation && product.variation.length >= 1 ? (
                       <Link
-                        to={`${process.env.PUBLIC_URL}/product/${product.id}`}
+                        to={`${process.env.PUBLIC_URL}/product/${product._id}`}
                       >
                         Select Option
                       </Link>

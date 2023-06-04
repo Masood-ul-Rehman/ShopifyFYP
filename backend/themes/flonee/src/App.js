@@ -85,10 +85,8 @@ const App = (props) => {
                   //     <Product {...routeProps} key={routeProps.params.id} />
                   //   ))
                   // }
-
-                  render={(routeProps) => (
-                    <Product {...routeProps} key={routeProps.match.params.id} />
-                  )}
+                  element={<Product />}
+                 
                 />
                 {/* Other pages */}
                 <Route

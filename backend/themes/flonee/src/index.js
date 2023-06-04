@@ -26,6 +26,7 @@ const root = document.getElementById("root");
 
 // fetch products from json file
 // store.dispatch(fetchProducts(products));
+store.dispatch(fetchProducts());
 
 ReactDOM.createRoot(root).render(
   <Provider store={store}>

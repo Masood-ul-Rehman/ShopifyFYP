@@ -75,7 +75,7 @@ const ShopGridStandard = ({ location, products }) => {
           <div className="container">
             <div className="row">
               <div className="col-lg-3 order-2 order-lg-1">
-                {/* shop sidebar */}
+                shop sidebar
                 <ShopSidebar
                   products={products}
                   getSortParams={getSortParams}
