@@ -53,11 +53,6 @@ function Login() {
     dispatch(login(userData));
   };
 
-  // const [checkboxValue, setCheckboxValue] = useState(false);
-  // const handleCheckboxChange = (event) => {
-  //   setCheckboxValue(event.target.checked);
-  // };
-
   if (isLoading) {
     return (
       <Loader />
@@ -67,46 +62,6 @@ function Login() {
 
   return (
     <>
-      {/* <section className="heading">
-        <h1>
-          <FaSignInAlt /> Login
-        </h1>
-        <p className="font-poppins text-3xl">Login and start setting goals</p>
-      </section>
-
-      <section className="form">
-        <form onSubmit={onSubmit}>
-          <div className="form-group">
-            <input
-              type="email"
-              className="form-control"
-              id="email"
-              name="email"
-              value={email}
-              placeholder="Enter your email"
-              onChange={onChange}
-            />
-          </div>
-          <div className="form-group">
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              name="password"
-              value={password}
-              placeholder="Enter password"
-              onChange={onChange}
-            />
-          </div>
-
-          <div className="form-group">
-            <button type="submit" className="btn btn-block">
-              Submit
-            </button>
-          </div>
-        </form>
-      </section> */}
-
       <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="mt-12 sm:mx-auto w-full sm:max-w-xl">
           <div className="bg-white pt-12 pb-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -155,24 +110,6 @@ function Login() {
             </div>
 
             <div className="mt-6 mx-4 flex items-center justify-between">
-              {/* <div className="">
-                <label className="relative flex items-center mt-2">
-                  <div className="checkbox flex items-center h-5">
-                    <input
-                      type="checkbox"
-                      checked={checkboxValue}
-                      onChange={handleCheckboxChange}
-                      className="form-checkbox border-neutral-800 h-4 w-4 text-neutral-800 transition duration-150 ease-in-out cursor-pointer checked:bg-pruplish"
-                    />
-                    <label></label>
-                  </div>
-
-                  <div className="ml-2 text-base -mt-[2px]">
-                    <span>Remember me</span>
-                  </div>
-                </label>
-              </div> */}
-
               <div className="text-base leading-5">
                 <p className="font-poppins text-sm font-light text-neutral-800">
                   Not have an accont?{" "}

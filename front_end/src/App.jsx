@@ -12,10 +12,17 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import Stores from "./pages/store/stores";
 import CreateNewStore from "./pages/store/createNewStore";
+import Dashborad from "./pages/dashboard/Dashborad";
+import Layout from "./components/logedinuser/Layout";
+import Products from "./pages/dashboard/products/Products";
+import AddProduct from "./pages/dashboard/products/AddProduct";
+import Updateprod from "./pages/dashboard/products/UpdateProd";
+import OrderPage from "./pages/dashboard/order/OrderPage";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
   const [refetchStores, setRefetch] = useState(false);
+  const store = localStorage.getItem("store");
   return (
     <div>
       <Router>
@@ -35,16 +42,17 @@ function App() {
                 path="/create"
                 element={<CreateNewStore refetch={setRefetch} />}
               />
-              {/* <Route path="/resetpassword" element={<ResetPassword />} />
-              <Route path="/createstore" element={<Createnewstore />} />
-             
-              <Route path="/" element={<Layout />}>
-                <Route index element={<Dashboradd />} />
+              <Route path="/dashboard/:id" element={<Layout />}>
+                <Route index element={<Dashborad />} />
                 <Route path="products" element={<Products />} />
                 <Route path="addproducts" element={<AddProduct />} />
                 <Route path="updateproduct" element={<Updateprod />} />
                 <Route path="orders" element={<OrderPage />} />
-              </Route> */}
+              </Route>
+              {/* <Route path="/resetpassword" element={<ResetPassword />} />
+              <Route path="/createstore" element={<Createnewstore />} />
+             
+             > */}
             </Routes>
           )}
           {!user && <Home />}

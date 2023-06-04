@@ -13,12 +13,7 @@ import Header from "./HeaderLoged";
 function Layout() {
   const navigate = useNavigate();
   const { user } = useSelector((state) => state.auth);
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate("/login");
-  //     //   toast.warning("You must login to access this page")
-  //   }
-  // }, [user, navigate]);
+
   return (
     <>
       <div className="bg-neutral-100 h-screen w-screen overflow-hidden flex flex-row">
