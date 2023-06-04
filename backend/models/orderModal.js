@@ -14,7 +14,9 @@ const orderSchema = mongoose.Schema(
         ref: "products",
       },
     ],
-
+    store_id: {
+      type: String,
+    },
     quantity: {
       type: Number,
       required: true,

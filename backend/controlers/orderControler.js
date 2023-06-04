@@ -5,6 +5,7 @@ const createOrder = asyncHandler(async (req, res) => {
     const { User, productId, quantity, customerName } = req.body;
     const newOrder = newOrder({
       User,
+      store_id,
       productId,
       quantity,
       customerName,
