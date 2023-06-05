@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { getStores, startStore } from "../../api/stores";
 import NoStore from "./noStorefound";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Stores = ({ refetchState }) => {
   const navigate = useNavigate();
+  const [storeid, setStoreId] = useState();
 
   const {
     data,
@@ -15,9 +16,15 @@ const Stores = ({ refetchState }) => {
     queryKey: ["getStores"],
     queryFn: getStores,
   });
+
+  // if (storeid !== null || storeid !== null || storeid !== " "){
+  //   const startStoreQuery = useQuery("startStore", startStore(storeid), enabled: false);
+  // }
+  const startStoreQuery = useQuery("startStore",  () => startStore(storeid), {enabled: false,});
   useEffect(() => {
     GetStores();
-  }, [refetchState]);
+    startStoreQuery.refetch();
+  }, [refetchState, storeid]);
   // function stopServer(store){
   //   const stop = useQuery({
   //     queryKey: ["startStore",store],
@@ -31,6 +38,12 @@ const Stores = ({ refetchState }) => {
     localStorage.setItem("store", storeId);
     navigate(`/dashboard/${storeId}`);
   };
+
+  const handleStartStore = (id) => {
+    // console.log(storeId);
+    // startStoreQuery.refetch(storeId);
+    setStoreId(id);
+  }
   return (
     <div>
       {!isLoading ? (
@@ -40,7 +53,7 @@ const Stores = ({ refetchState }) => {
               <div key={storeData._id}>
                 <h1>Theme Name: {storeData.theme}</h1>
                 <h1>Website Name: {storeData.name}</h1>
-                <button onClick={() => {}}>View website</button>
+                <button onClick={() => handleStartStore(storeData._id)}>View website</button>
                 <button>stop website</button>
                 <button
                   onClick={() => {
