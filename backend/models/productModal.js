@@ -6,6 +6,11 @@ const productSchema = mongoose.Schema(
       required: true,
       ref: "user",
     },
+    store: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "storeDetails",
+    },
     title: {
       type: String,
       required: [true, "Please enter Name of your Product"],
