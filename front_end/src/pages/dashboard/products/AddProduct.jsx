@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import { AddProductThnuk } from "../../../store";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useNavigate, useParams } from "react-router-dom";
 function AddProduct() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -19,6 +19,7 @@ function AddProduct() {
     image: null,
   });
   const { title, description, shortdesc, price, quantity, color } = formData;
+  const { id } = useParams();
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -48,11 +49,14 @@ function AddProduct() {
       <div className="row">
         <div className="flex justify-between items-center py-4">
           <h1 className="font-poppins font-medium text-6xl">Add Product</h1>
-          <Link to="/">
-            <Button semiRounded simpleBlack>
-              Back to dashboard
-            </Button>
-          </Link>
+          <div
+            onClick={() => {
+              navigate(`/dashboard/${id}`);
+            }}
+          ></div>
+          <Button semiRounded simpleBlack>
+            Back to products
+          </Button>
         </div>
         <hr />
       </div>

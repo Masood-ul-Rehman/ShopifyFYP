@@ -6,11 +6,16 @@ import { useMutation } from "@tanstack/react-query";
 import { deleteProduct } from "../../../api/product";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate, useParams } from "react-router-dom";
+
 function Products() {
   const { isLoading, isSuccess, isError, data, error, refetch } = useQuery({
     queryKey: ["getProducts"],
     queryFn: getProducts,
   });
+  const navigate = useNavigate();
+  const { id } = useParams();
+
   const deletePost = useMutation((id) => {
     return deleteProduct(id);
   });
@@ -35,11 +40,15 @@ function Products() {
         <div className="row">
           <div className="flex justify-between items-center py-4">
             <h1 className="font-poppins font-medium text-6xl">Products</h1>
-            <Link to="/addproducts">
+            <div
+              onClick={() => {
+                navigate(`/dashboard/${id}/addproducts`);
+              }}
+            >
               <Button semiRounded simpleBlack>
                 Add New Product
               </Button>
-            </Link>
+            </div>
           </div>
           <hr />
         </div>
@@ -88,11 +97,16 @@ function Products() {
                   </div>
 
                   <div className="btns flex">
-                    <Link to="/updateproduct" state={detail}>
+                    <div
+                      onClick={() => {
+                        navigate(`/dashboard/${id}/updateproduct`);
+                      }}
+                    >
+                      {" "}
                       <Button semiRounded encourage>
                         Update
                       </Button>
-                    </Link>
+                    </div>
                     <Button
                       semiRounded
                       danger
