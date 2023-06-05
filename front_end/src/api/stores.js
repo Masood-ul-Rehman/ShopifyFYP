@@ -2,7 +2,7 @@ import axiosInstance from "../store/axioshelper";
 import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { fuser, API_URL } from "./product";
-
+console.log(fuser);
 export const getStores = async () => {
   try {
     const response = await axiosInstance.get(
