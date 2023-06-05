@@ -79,31 +79,33 @@ const useStyles = makeStyles((theme) => ({
 
 const CartItem = ({ item }) => {
    const classes = useStyles();
-   const { error, pending } = useSelector((state) => state.cart);
-   const {
-      quantity,
-      product_id: { _id, image, price, title },
-   } = item;
+   // const { error, pending } = useSelector((state) => state.cart);
+   // const {
+   //    quantity,
+   //    product_id: { _id, image, price, title },
+   // } = item;
+
+   // const { _id, title, description, price } = item
    const dispatch = useDispatch();
 
-   const handleDelete = () => {
-      dispatch(removeItemFromCart(_id));
-      if (!error && !pending) {
-         dispatch(
-            openSnackBar({
-               severity: "success",
-               text: "Item has removed cart",
-            })
-         );
-      } else if (error && !pending) {
-         dispatch(
-            openSnackBar({
-               severity: "error",
-               text: "Something went wrong",
-            })
-         );
-      }
-   };
+   // const handleDelete = () => {
+   //    dispatch(removeItemFromCart(_id));
+   //    if (!error && !pending) {
+   //       dispatch(
+   //          openSnackBar({
+   //             severity: "success",
+   //             text: "Item has removed cart",
+   //          })
+   //       );
+   //    } else if (error && !pending) {
+   //       dispatch(
+   //          openSnackBar({
+   //             severity: "error",
+   //             text: "Something went wrong",
+   //          })
+   //       );
+   //    }
+   // };
    return (
       <Grid
          container
@@ -127,7 +129,7 @@ const CartItem = ({ item }) => {
                className={classNames(classes.hideMobile, classes.maxHeight)}
             >
                <div className={classes.imgContainer}>
-                  <img className={classes.img} src={image} alt={title} />
+                  <img className={classes.img} src={`http://localhost:5000/images/${item?.image.data}`} alt={item?.title} />
                </div>
             </Grid>
             <Grid item container xs={12} sm={9} md={8} className={classes.info}>
@@ -140,10 +142,10 @@ const CartItem = ({ item }) => {
                   className={classes.infoTitle}
                >
                   <Typography variant="body2" color="initial">
-                     {title.substring(0, 30)}...
+                     {item?.title}
                   </Typography>
                   <Delete
-                     onClick={handleDelete}
+                     // onClick={handleDelete}
                      className={classNames(classes.dangerText, classes.cursor)}
                   />
                </Grid>
@@ -168,10 +170,10 @@ const CartItem = ({ item }) => {
                         color="initial"
                         className={classes.paleText}
                      >
-                        {price} x {quantity}
+                        {item.price} x {item.quantity}
                      </Typography>
                      <Typography variant="subtitle2" color="initial">
-                        {Math.round(price * quantity * 100) / 100}
+                        {Math.round(item.price * item.quantity * 100) / 100}
                      </Typography>
                   </Grid>
                   <Grid
@@ -184,13 +186,13 @@ const CartItem = ({ item }) => {
                      xs={4}
                   >
                      <IconButton
-                        onClick={() => dispatch(decrementCartItem(_id))}
+                        onClick={() => dispatch(decrementCartItem(item?._id))}
                      >
                         <Remove className={classes.paleText} />
                      </IconButton>
-                     <Typography variant="subtitle2">{quantity}</Typography>
+                     <Typography variant="subtitle2">{item?.quantity}</Typography>
                      <IconButton
-                        onClick={() => dispatch(incrementCartItem(_id))}
+                        onClick={() => dispatch(incrementCartItem(item?._id))}
                      >
                         <Add className={classes.paleText} />
                      </IconButton>
@@ -199,6 +201,7 @@ const CartItem = ({ item }) => {
             </Grid>
          </Grid>
       </Grid>
+      // <h1>hello</h1>
    );
 };
 

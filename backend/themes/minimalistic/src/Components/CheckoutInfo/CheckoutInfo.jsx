@@ -8,11 +8,13 @@ import {
    Box,
    TextField,
 } from "@material-ui/core";
+import storeInfo from "../../storeData.json";
 
 // import { Link } from "react-router-dom";
 // import { Navigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { checkout } from "../../Redux/cartSlice";
+import { useNavigate } from "react-router";
 
 const useStyles = makeStyles((theme) => ({
    formContainer: {
@@ -64,19 +66,45 @@ const useStyles = makeStyles((theme) => ({
       letterSpacing: 2,
    },
 }));
+
+
 const CheckoutInfo = () => {
    const classes = useStyles();
-
-   const { total, pending } = useSelector((state) => state.cart);
+   const navigate = useNavigate();
    const dispatch = useDispatch();
+
+   const { cartItems } = useSelector((state) => state.cartItems);
+
+   // let productIdArr = [];
+   // cartItems.forEach((item) => {
+   //    productIdArr.push({ _id: item._id, quantity: item.quantity });
+   //  });
+
+   const productIdMap = new Map();
+
+   cartItems.forEach((item) => {
+   const productId = item._id;
+
+  if (productIdMap.has(productId)) {
+    // If the product ID already exists in the map, increase the quantity by 1
+    const existingItem = productIdMap.get(productId);
+    existingItem.quantity += 1;
+  } else {
+    // If it's a new product ID, initialize the quantity to 1
+    productIdMap.set(productId, { _id: productId, quantity: 1 });
+  }
+   });
+
+   const productIdArr = Array.from(productIdMap.values());
 
    const handleSubmit = (event) => {
       event.preventDefault();
       const data = new FormData(event.currentTarget);
       const email = data.get("email");
-      const name = data.get("name");
+      const customerName = data.get("name");
       const phoneNumber = data.get("phoneNumber");
-      dispatch(checkout({ email, name, phoneNumber, amount: total }));
+      dispatch(checkout({ User: storeInfo.User, customerName, store_id: storeInfo.store_id, productId: productIdArr,  quantity:cartItems.length, total: 1300 }));
+      navigate('/products')
    };
 
    return (
@@ -133,7 +161,7 @@ const CheckoutInfo = () => {
                   variant="contained"
                   color="primary"
                   className={classes.marginTopThree}
-                  disabled={pending}
+                  // disabled={pending}
                >
                   <Typography variant="body1" className={classes.letterSpace}>
                      Checkout

@@ -59,22 +59,22 @@ const App = () => {
             <Route
                path="/cart"
                element={
-                  <PrivateRoute>
+                  <>
                      <Header />
                      <Cart />
                      <Footer />
-                  </PrivateRoute>
+                  </>
                }
             />
             {url === "" ? (
                <Route
                   path="/checkout"
                   element={
-                     <PrivateRoute>
+                     <>
                         <Header />
                         <Checkout />
                         <Footer />
-                     </PrivateRoute>
+                     </>
                   }
                />
             ) : (
@@ -105,11 +105,11 @@ const App = () => {
             <Route
                path="/shipping"
                element={
-                  <PrivateRoute>
+                  <>
                      <Header />
                      <Shipping />
                      <Footer />
-                  </PrivateRoute>
+                  </>
                }
             />
          </Routes>

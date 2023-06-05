@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
    Grid,
@@ -9,10 +9,14 @@ import {
    Chip,
 } from "@material-ui/core";
 import classNames from "classnames";
-import { addToCart } from "../../Redux/cartSlice";
+// import { addToCart } from "../../Redux/cartSlice";
 import { openSnackBar } from "../../Redux/appSlice";
 import clsx from 'clsx';
 import { useNavigate } from "react-router";
+import { getSingleItem } from "../../Redux/appSlice";
+import { addToCart } from "../../Redux/addToCart";
+import { useParams } from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
    container: {
@@ -48,24 +52,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SingleProduct = () => {
+   const dispatch = useDispatch();
    const navigate = useNavigate();
-   const { singleItem } = useSelector((state) => state.app);
+   const { items } = useSelector((state) => state.app);
    const { pending, error } = useSelector((state) => state.cart);
    const user = useSelector((state) => state.user.user);
 
-   const classes = useStyles();
-   const { title, price, description, quantity, sold, image: {data}, _id } = singleItem;
-   const dispatch = useDispatch();
+   const { id } = useParams();
+   
 
-   console.log(singleItem, "this is the single item");
+   const classes = useStyles();
+   const filteredItem = items.filter((item) => item._id === id)[0];
+
 
    const handleClick = () => {
-      if (!user) {
-         dispatch(openSnackBar({ severity: "error", text: "Please Log In" }));
-         navigate("/login")
+      // if (!user) {
+      //    dispatch(openSnackBar({ severity: "error", text: "Please Log In" }));
+      //    navigate("/login")
 
-      } else {
-         dispatch(addToCart(_id));
+      // } else 
+      {
+         dispatch(addToCart(filteredItem));
          if (!error && !pending) {
             dispatch(
                openSnackBar({
@@ -84,17 +91,19 @@ const SingleProduct = () => {
       }
    };
 
+
    return (
-      // <h1>hello</h1>
+
+      
       <Grid container className={classes.container}>
          <Grid item xs={12} sm={4}>
             <div className={classes.imgContainer}>
-               <img src={`http://localhost:5000/images/${data}`} alt={title} className={classes.img} />
+               <img src={`http://localhost:5000/images/${filteredItem?.image.data}`} alt={filteredItem?.title} className={classes.img} />
             </div>
          </Grid>
          <Grid item xs={12} sm={6}>
             <Typography className={classes.marginTopTwo} variant="h4">
-               {title}
+               {filteredItem?.title}
             </Typography>
 
             
@@ -102,18 +111,18 @@ const SingleProduct = () => {
                className={classNames(classes.paleText, classes.marginTopTwo)}
                variant="body1"
             >
-               {description}
+               {filteredItem?.description}
             </Typography>
             <Typography className={classes.marginTopTwo} variant="subtitle2">
-               <b>Price:</b>${price}
+               <b>Price:</b>${filteredItem?.price}
             </Typography>
 
             <div style={{display: "flex"}}>
             <Typography className={classes.marginTopTwo} variant="subtitle2">
-               <b>Available Stock:</b> {quantity}
+               <b>Available Stock:</b> {filteredItem?.quantity}
             </Typography>
             <Typography className={clsx(classes.marginTopTwo, classes.marginLeftTwo)} variant="subtitle2">
-               <b>Item sold:</b> {sold}
+               <b>Item sold:</b> {filteredItem?.sold}
             </Typography>
             </div>
 
@@ -129,6 +138,7 @@ const SingleProduct = () => {
             </Button>
          </Grid>
       </Grid>
+      // <div>hello</div>
    );
 };
 

@@ -22,13 +22,12 @@ const SingleProductPage = () => {
    const { id } = useParams();
    const { pending } = useSelector((state) => state.app);
    const classes = useStyles();
-
-   console.log(id, "this is the id");
-
+   
    const dispatch = useDispatch();
    useEffect(() => {
       dispatch(getSingleItem(id));
-   }, [id, dispatch]);
+   }, []);
+
    return (
       <>
          {!pending ? (

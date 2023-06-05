@@ -52,9 +52,29 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const mapThroughItems = (items) => {
-   return items.map((item, idx) => {
+
+   const productMap = new Map();
+
+   items.forEach((item) => {
+      const productId = item._id;
+  
+      if (productMap.has(productId)) {
+        // If the product ID already exists in the map, increase its quantity
+        const existingItem = productMap.get(productId);
+        existingItem.quantity += 1;
+      } else {
+        // If it's a new product ID, add it to the map
+        productMap.set(productId, { ...item, quantity: 1 });
+      }
+    });
+
+    return Array.from(productMap.values()).map((item, idx) => {
       return <CartItem key={idx} item={item} />;
-   });
+    });
+
+   // return items.map((item, idx) => {
+   //    return <CartItem key={idx} item={item} />;
+   // });
 };
 const DangerButton = withStyles((theme) => ({
    root: {
@@ -88,8 +108,8 @@ const SuccessButton = withStyles((theme) => ({
 }))(Button);
 
 const CartList = () => {
-   const { cartItems, pending, cartLength, error, total } = useSelector(
-      (state) => state.cart
+   const { cartItems } = useSelector(
+      (state) => state.cartItems
    );
    const classes = useStyles();
    const navigate = useNavigate();
@@ -97,35 +117,33 @@ const CartList = () => {
    const isMounted = useRef(false);
 
    useEffect(() => {
-      if (isMounted.current && cartLength !== 0) {
+      if (cartItems.length !== 0) {
          dispatch(getTotal());
-      } else {
-         isMounted.current = true;
       }
-   }, [dispatch, cartItems, cartLength]);
+   }, [dispatch, cartItems, cartItems.length]);
 
-   const handleClearCart = () => {
-      dispatch(clearCart());
-      if (!error && !pending) {
-         dispatch(
-            openSnackBar({
-               severity: "success",
-               text: "Cart has been cleared",
-            })
-         );
-      } else if (error && !pending) {
-         dispatch(
-            openSnackBar({
-               severity: "error",
-               text: "Something went wrong",
-            })
-         );
-      }
-   };
+   // const handleClearCart = () => {
+   //    dispatch(clearCart());
+   //    if (!error && !pending) {
+   //       dispatch(
+   //          openSnackBar({
+   //             severity: "success",
+   //             text: "Cart has been cleared",
+   //          })
+   //       );
+   //    } else if (error && !pending) {
+   //       dispatch(
+   //          openSnackBar({
+   //             severity: "error",
+   //             text: "Something went wrong",
+   //          })
+   //       );
+   //    }
+   // };
 
    return (
       <>
-         {!pending && cartLength !== 0 ? (
+         {cartItems.length !== 0 ? (
             <Grid className={classes.container} container item xs={10} lg={8}>
                <Button
                   onClick={() => navigate("/products")}
@@ -147,7 +165,7 @@ const CartList = () => {
                   className={classes.priceDiv}
                >
                   <Typography variant="body1" color="initial">
-                     Total: {total}
+                     Total: {cartItems.length}
                   </Typography>
                </Grid>
                <Grid
@@ -158,7 +176,7 @@ const CartList = () => {
                >
                   <DangerButton
                      variant="contained"
-                     onClick={handleClearCart}
+                     // onClick={handleClearCart}
                      className={classes.marginRightTwo}
                   >
                      Clear Cart
@@ -171,7 +189,7 @@ const CartList = () => {
                   </SuccessButton>
                </Grid>
             </Grid>
-         ) : !pending && cartLength === 0 ? (
+         ) :  cartItems.length === 0 ? (
             <Grid
                className={classes.container}
                direction="column"
