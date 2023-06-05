@@ -99,7 +99,7 @@ const getAllProduct = asyncHandler(async (req, res) => {
     // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
 
     // let query = Product.find(JSON.parse(queryStr));
-    const userProducts = await Product.find(req.body.User);
+    const userProducts = await Product.find(req.body.store_id);
     res.json(userProducts);
 
     // // Sorting

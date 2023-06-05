@@ -17,4 +17,11 @@ const createOrder = asyncHandler(async (req, res) => {
     return res.status(500).json({ success: false, error: error.message });
   }
 });
-module.exports = { createOrder };
+const getOrders = asyncHandler(async (req, res) => {
+  try {
+    const { store_id } = req.params;
+    const Order = await NewOrder.find(store_id);
+    res.json(Order);
+  } catch (error) {}
+});
+module.exports = { createOrder, getOrders };
