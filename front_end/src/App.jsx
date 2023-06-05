@@ -7,7 +7,7 @@ import Header from "./components/Header";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
 import "./index.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // react redux
 import { useSelector } from "react-redux";
 import Stores from "./pages/store/stores";
@@ -23,6 +23,7 @@ function App() {
   const { user } = useSelector((state) => state.auth);
   const [refetchStores, setRefetch] = useState(false);
   const store = localStorage.getItem("store");
+
   return (
     <div>
       <Router>
