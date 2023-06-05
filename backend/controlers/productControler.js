@@ -9,6 +9,7 @@ const addProduct = asyncHandler(async (req, res) => {
     console.log(req.body);
     const {
       User,
+      store,
       title,
       slug,
       description,
@@ -27,6 +28,7 @@ const addProduct = asyncHandler(async (req, res) => {
     const createdSlug = slugify(req.body.title);
     const newProduct = await Product.create({
       User,
+      store,
       title,
       slug: createdSlug,
       description,
