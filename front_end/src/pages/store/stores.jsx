@@ -43,9 +43,18 @@ const Stores = ({ refetchState }) => {
 
   const handleStartStore = (id) => {
     // console.log(storeId);
-    // setStoreId(id);
-    startStoreQuery.refetch({ storeid: id });
+    setStoreId(id);
+    // startStoreQuery.refetch();
+    // if(storeid !== undefined){
+    //   startStoreQuery.refetch();
+    // }
   }
+
+  useEffect(() => {
+    if(storeid !== undefined){
+      startStoreQuery.refetch();
+    }
+  }, [storeid])
   return (
     <>
     <h1 className = "font-poppins text-4xl text-center my-4" >Available Stores</h1>
