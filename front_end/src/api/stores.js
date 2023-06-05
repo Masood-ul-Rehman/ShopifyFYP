@@ -13,6 +13,7 @@ export const getStores = async () => {
     toast.error("Error getting Stores:", error, {
       position: toast.POSITION.TOP_RIGHT,
     });
+    throw error;
   }
 };
 export const storeDetails = async (data) => {
@@ -26,6 +27,7 @@ export const storeDetails = async (data) => {
     toast.error("Error creating Store:", error, {
       position: toast.POSITION.TOP_RIGHT,
     });
+    throw error;
   }
 };
 export const startStore = async (id) => {
@@ -38,5 +40,19 @@ export const startStore = async (id) => {
     toast.error("Error starting Store:", error, {
       position: toast.POSITION.TOP_RIGHT,
     });
+    throw error;
+  }
+};
+export const getOrders = async (id) => {
+  try {
+    const response = await axiosInstance.get(
+      `${API_URL}/api/order/getOrders/${id}`
+    );
+    return response.data;
+  } catch (error) {
+    toast.error("Error getting Orders:", error, {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+    throw error;
   }
 };
