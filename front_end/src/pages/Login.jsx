@@ -71,7 +71,6 @@ function Login() {
           </div>
           <form
             onSubmit={onSubmit}
-            noValidate
             className="bg-white py-12 px-4 shadow sm:rounded-lg sm:px-10"
           >
             <div>
