@@ -7,8 +7,11 @@ const User = localStorage.getItem("user");
 const addnewProduct = async (data) => {
   const user = User.slice(1);
   const fuser = user.slice(0, -1);
+  const store = localStorage.getItem("store");
+
   const fdata = {
     User: fuser,
+    store: store,
     ...data,
   };
   console.log(JSON.stringify(fdata));
