@@ -47,6 +47,8 @@ const Stores = ({ refetchState }) => {
     startStoreQuery.refetch({ storeid: id });
   }
   return (
+    <>
+    <h1 className = "font-poppins text-4xl text-center my-4" >Available Stores</h1>
     <div className="flex justify-between mx-8">
       {!isLoading ? (
         data?.data[0] ? (
@@ -79,6 +81,7 @@ const Stores = ({ refetchState }) => {
         <h1>Loading...</h1>
       )}
     </div>
+    </>
   );
 };
 export default Stores;
