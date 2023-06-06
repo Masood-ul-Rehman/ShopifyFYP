@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const axiosForm = axios.create({
+const axiosInstance = axios.create({
   headers: {
-    "Content-Type": "application/json; charset=utf-8",
+    "Content-Type": "",
   },
 });
 
@@ -14,11 +14,14 @@ const addBearerToken = (config) => {
       Authorization: `Bearer ${token}`,
     };
   }
+  if (config.data && !(config.data instanceof FormData)) {
+    delete config.headers["Content-Type"];
+  }
   return config;
 };
 
-axiosForm.interceptors.request.use(addBearerToken, (error) => {
+axiosInstance.interceptors.request.use(addBearerToken, (error) => {
   return Promise.reject(error);
 });
 
-export default axiosForm;
+export default axiosInstance;

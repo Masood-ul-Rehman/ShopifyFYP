@@ -39,18 +39,19 @@ const store_id = sdata.store_id;
 
 export const getItems = createAsyncThunk("products/fetch", async () => {
   const response = await axiosForm.post("http://localhost:5000/api/product", {
-    store_id: "264e3aef-1032-4ca3-8c78-be586616ea3e",
+    store_id: store_id,
   });
-  return response;
+  return response.data;
 });
 
 export const getSingleItem = createAsyncThunk(
   "products/getSingleItem",
   async (id) => {
-    const { data } = await axiosInstance.get(
+    const response = await axiosInstance.get(
       `http://localhost:5000/api/product/${id}`
     );
-    return data;
+
+    return response.data;
   }
 );
 
