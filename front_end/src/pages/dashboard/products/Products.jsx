@@ -99,7 +99,9 @@ function Products() {
                   <div className="btns flex">
                     <div
                       onClick={() => {
-                        navigate(`/dashboard/${id}/updateproduct`);
+                        navigate(`/dashboard/${id}/updateproduct`, {
+                          state: detail,
+                        });
                       }}
                     >
                       {" "}

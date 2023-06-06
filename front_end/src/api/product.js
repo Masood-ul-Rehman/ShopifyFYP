@@ -36,3 +36,24 @@ export const deleteProduct = async (id) => {
     });
   }
 };
+export const updateProduct = async ({ user, id, formData }) => {
+  const { title, shortdesc, price, color, description, slug, image, quantity } =
+    formData;
+
+  try {
+    const response = await axiosInstance.put(`${API_URL}/api/product/${id}`, {
+      User: user,
+      title,
+      slug,
+      description,
+      shortdesc,
+      price,
+      quantity,
+      color,
+      image,
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -2,9 +2,18 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
 import { useLocation } from "react-router";
+import { useMutation } from "@tanstack/react-query";
+import { updateProduct } from "../../../api/product";
 
 function Updateprod({ detail }) {
   const data = useLocation();
+  const id = data?.state?._id;
+  const user = data?.state?.User;
+  console.log(data, "this is the id of the product");
+
+  const update = useMutation(({ user, id, formData }) => {
+    return updateProduct({ user, id, formData });
+  });
 
   //this data will be obtained from the store using redux
   const [formData, setFormData] = useState({
@@ -15,10 +24,11 @@ function Updateprod({ detail }) {
     price: data?.state?.price,
     quantity: data?.state?.quantity,
     color: data?.state?.color,
-    image: null,
+    image: data?.state?.image,
   });
-  console.log(detail);
-  const { title, shortDesc, price, discount } = formData;
+  console.log(detail, "these are the details");
+  const { title, shortdesc, price, color, description, slug, image, quantity } =
+    formData;
 
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -37,9 +47,9 @@ function Updateprod({ detail }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("submit hua");
+    update.mutate({ user, id, formData });
   };
 
   return (
@@ -47,7 +57,9 @@ function Updateprod({ detail }) {
       <div className="py-4">
         <div className="row">
           <div className="flex justify-between items-center py-4">
-            <h1 className="font-poppins font-medium text-6xl">Add Product</h1>
+            <h1 className="font-poppins font-medium text-6xl">
+              Update product
+            </h1>
             <Link to="/dashboard/products">
               <Button semiRounded simpleBlack>
                 Back to products
@@ -86,9 +98,9 @@ function Updateprod({ detail }) {
                 </label>
                 <input
                   type="text"
-                  id="shortDesc"
-                  name="shortDesc"
-                  value={shortDesc}
+                  id="shortdesc"
+                  name="shortdesc"
+                  value={shortdesc}
                   placeholder="Reliable & gives you the best performance"
                   onChange={onChange}
                   className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
@@ -115,23 +127,24 @@ function Updateprod({ detail }) {
 
               <div className="w-1/2 ml-6">
                 <label
-                  htmlFor="discount"
+                  htmlFor="id"
                   className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
                 >
-                  Discount %age
+                  Color
                 </label>
                 <input
-                  type="number"
-                  id="discount"
-                  name="discount"
-                  value={discount}
+                  required
+                  type="text"
+                  id="color"
+                  name="color"
+                  value={color}
                   onChange={onChange}
-                  className="no-button-increment form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full appearance-none"
+                  className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
                 />
               </div>
             </div>
 
-            <div className="mt-16 relative">
+            {/* <div className="mt-16 relative">
               <label className="flex flex-col items-center w-full px-4 py-6 rounded-md bg-white border border-neutral-800 shadow-md tracking-wide cursor-pointer focus:shadow-oline-neutral-800 transition duration-150 ease-in-out">
                 <span className="text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800 absolute left-0 -top-[36px]">
                   Product image
@@ -168,10 +181,29 @@ function Updateprod({ detail }) {
                   onChange={handleImageChange}
                 />
               </label>
+            </div> */}
+            <div className="mt-6">
+              <label
+                htmlFor="details"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
+              >
+                Full Description
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                value={description}
+                onChange={onChange}
+                placeholder="Products details..."
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+                rows="4"
+              >
+                Enter product details here...
+              </textarea>
             </div>
 
             <Button type="submit" semiRounded simpleBlack styles="mt-10">
-              Add now
+              Update
             </Button>
           </form>
         </div>
