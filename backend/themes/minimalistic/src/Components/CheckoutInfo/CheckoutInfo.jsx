@@ -9,6 +9,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import storeInfo from "../../storeData.json";
+import { openSnackBar } from "../../Redux/appSlice";
 
 // import { Link } from "react-router-dom";
 // import { Navigate } from "react-router-dom";
@@ -109,6 +110,12 @@ const CheckoutInfo = () => {
         store_id: storeInfo.store_id,
         productId: productIdArr,
         total: 1300,
+      })
+    );
+    dispatch(
+      openSnackBar({
+        severity: "success",
+        text: "Order Placed",
       })
     );
     navigate("/products");

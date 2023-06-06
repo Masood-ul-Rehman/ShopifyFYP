@@ -236,6 +236,7 @@ export const cartSlice = createSlice({
     [checkout.fulfilled]: (state, action) => {
       state.pending = false;
       state.error = false;
+
       state.url = action.payload.url;
     },
     [checkout.rejected]: (state) => {
