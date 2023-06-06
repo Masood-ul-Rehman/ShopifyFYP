@@ -16,7 +16,10 @@ app.use(express.json());
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/images", express.static(path.join(__dirname, "../", "images")));
+app.use(
+  "/images",
+  express.static(path.join(__dirname, "../backend", "images"))
+);
 
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/product", require("./routes/productRoutes"));

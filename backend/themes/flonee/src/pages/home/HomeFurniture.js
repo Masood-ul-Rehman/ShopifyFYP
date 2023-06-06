@@ -9,13 +9,6 @@ import BannerFifteen from "../../wrappers/banner/BannerFifteen";
 import { fetchSingleProduct } from "../../redux/actions/productActions";
 
 const HomeFurniture = () => {
-  // const dispatch = useDispatch()
-
-  // useEffect(() => {
-  //   dispatch(fetchSingleProduct("647318062e45597a68d39763"))
-  // }, [])
-
-
   return (
     <Fragment>
       <MetaTags>

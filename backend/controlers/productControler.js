@@ -3,48 +3,119 @@ const Product = require("../models/productModal");
 const asyncHandler = require("express-async-handler");
 const slugify = require("slugify");
 const Image = require("../models/ImageModal");
+const formidable = require("formidable");
+const fs = require("fs");
+const path = require("path");
+const { error } = require("console");
 
+// const addProduct = asyncHandler(async (req, res) => {
+//   try {
+//     console.log(req.body);
+//     const {
+//       User,
+//       store_id,
+//       title,
+//       slug,
+//       description,
+//       shortdesc,
+//       price,
+//       category,
+//       quantity,
+//       sold,
+//       colors,
+//       image,
+//     } = req.body;
+//     if (req.body.title) {
+//       req.body.slug = slugify(req.body.title);
+//     }
+//     console.log(req.file + "file comming");
+//     const createdSlug = slugify(req.body.title);
+//     const newProduct = await Product.create({
+//       User,
+//       store_id,
+//       title,
+//       slug: createdSlug,
+//       description,
+//       shortdesc,
+//       price,
+//       category,
+//       quantity,
+//       sold,
+//       colors,
+//       image: { data: req.file.filename, contentType: req.file.mimetype },
+//     });
+
+//     res.json("Productuct added");
+//   } catch (error) {
+//     throw new Error(error);
+//   }
+// });
 const addProduct = asyncHandler(async (req, res) => {
-  try {
-    console.log(req.body);
-    const {
-      User,
-      store,
-      title,
-      slug,
-      description,
-      shortdesc,
-      price,
-      category,
-      quantity,
-      sold,
-      colors,
-      image,
-    } = req.body;
-    if (req.body.title) {
-      req.body.slug = slugify(req.body.title);
-    }
-    console.log(req.file);
-    const createdSlug = slugify(req.body.title);
-    const newProduct = await Product.create({
-      User,
-      store,
-      title,
-      slug: createdSlug,
-      description,
-      shortdesc,
-      price,
-      category,
-      quantity,
-      sold,
-      colors,
-      image: { data: req.file.filename, contentType: req.file.mimetype },
-    });
+  const form = formidable({ multiples: false, maxFileSize: 10 * 1024 * 1024 });
 
-    res.json("Productuct added");
-  } catch (error) {
-    throw new Error(error);
-  }
+  form.parse(req, async (err, fields, files) => {
+    if (err) {
+      // Handle error during form parsing
+      return res.status(500).json({ error: "Error parsing form data." });
+    }
+    console.log("Fields:", fields);
+    console.log("Files:", files);
+
+    try {
+      const {
+        User,
+        store_id,
+        title,
+        description,
+        shortdesc,
+        price,
+        category,
+        quantity,
+        sold,
+        colors,
+      } = fields;
+
+      const slug = title.toLowerCase().replace(/\s+/g, "-");
+
+      const { image } = files;
+      const imageData = fs.readFileSync(image.filepath);
+      const imageFilename = `${Date.now()}-${image.originalFilename}`;
+      const imagesDirectory = path.join(__dirname, "..", "images");
+      if (!fs.existsSync(imagesDirectory)) {
+        fs.mkdirSync(imagesDirectory);
+      }
+      const imagePath = path.join(__dirname, "..", "images", imageFilename);
+
+      fs.writeFileSync(imagePath, imageData);
+
+      if (!image) {
+        return res.status(400).json({ error: "No image uploaded." });
+      }
+
+      const newProduct = await Product.create({
+        User,
+        store_id,
+        title,
+        slug: slug,
+        description,
+        shortdesc,
+        price,
+        category,
+        quantity,
+        sold,
+        colors,
+        image: {
+          data: imageFilename,
+          contentType: image.mimetype,
+        },
+      });
+
+      return res.json("Product added");
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Error adding product." });
+    }
+  });
 });
 
 const updateProduct = asyncHandler(async (req, res) => {
@@ -91,45 +162,13 @@ const getaProduct = asyncHandler(async (req, res) => {
 });
 const getAllProduct = asyncHandler(async (req, res) => {
   try {
-    // Filtering
-    // const queryObj = { ...req.query };
-    // const excludeFields = ["page", "sort", "limit", "fields"];
-    // excludeFields.forEach((el) => delete queryObj[el]);
-    // let queryStr = JSON.stringify(queryObj);
-    // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-
-    // let query = Product.find(JSON.parse(queryStr));
-    const userProducts = await Product.find(req.body.store_id);
+    const { store_id } = req.body;
+    if (!store_id) {
+      res.status(400).send("Enter store_id");
+    }
+    console.log(store_id);
+    const userProducts = await Product.find({ store_id: store_id });
     res.json(userProducts);
-
-    // // Sorting
-    // if (req.query.sort) {
-    //   const sortBy = req.query.sort.split(",").join(" ");
-    //   query = query.sort(sortBy);
-    // } else {
-    //   query = query.sort("-createdAt");
-    // }
-
-    // // limiting the fields
-
-    // if (req.query.fields) {
-    //   const fields = req.query.fields.split(",").join(" ");
-    //   query = query.select(fields);
-    // } else {
-    //   query = query.select("-__v");
-    // }
-
-    // // pagination
-
-    // const page = req.query.page;
-    // const limit = req.query.limit;
-    // const skip = (page - 1) * limit;
-    // query = query.skip(skip).limit(limit);
-    // if (req.query.page) {
-    //   const productCount = await Product.countDocuments();
-    //   if (skip >= productCount) throw new Error("This Page does not exists");
-    // }
-    // const product = await query;
   } catch (error) {
     throw new Error(error);
   }

@@ -1,6 +1,7 @@
 import axiosInstance from "../../axioshelper";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axiosForm from "../../axiosFormhelper";
 const API_URL = "http://localhost:5000/api/product";
 
 const User = localStorage.getItem("user");
@@ -11,13 +12,13 @@ const addnewProduct = async (data) => {
 
   const fdata = {
     User: fuser,
-    store: store,
+    store_id: store,
     ...data,
   };
   console.log(JSON.stringify(fdata));
 
   try {
-    const response = await axiosInstance.post(`${API_URL}/addProduct`, fdata);
+    const response = await axiosForm.post(`${API_URL}/addProduct`, fdata);
     toast.success("Successfully added product!", {
       position: toast.POSITION.TOP_RIGHT,
     });
@@ -31,7 +32,7 @@ const addnewProduct = async (data) => {
 };
 
 const updateProduct = async (id, data) => {
-  const response = await axiosInstance.put(`${API_URL}/${id}`, data);
+  const response = await axiosForm.put(`${API_URL}/${id}`, data);
 };
 export const ProductService = {
   addnewProduct,

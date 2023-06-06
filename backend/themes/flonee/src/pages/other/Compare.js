@@ -107,12 +107,11 @@ const Compare = ({
                                     ) : compareItem.variation &&
                                       compareItem.variation.length >= 1 ? (
                                       <Link
-                                        to={`${process.env.PUBLIC_URL}/product/${compareItem.id}`}
+                                        to={`http://localhost:5000/images/product/${compareItem.id}`}
                                       >
                                         Select Option
                                       </Link>
-                                    ) : compareItem.stock &&
-                                      compareItem.stock > 0 ? (
+                                    ) : (
                                       <button
                                         onClick={() =>
                                           addToCart(compareItem, addToast)
@@ -137,10 +136,6 @@ const Compare = ({
                                         cartItem.quantity > 0
                                           ? "Added"
                                           : "Add to cart"}
-                                      </button>
-                                    ) : (
-                                      <button disabled className="active">
-                                        Out of Stock
                                       </button>
                                     )}
                                   </div>

@@ -180,25 +180,21 @@ const ProductDescriptionInfo = ({
             </button>
           </div>
           <div className="pro-details-cart btn-hover">
-            {productStock && productStock > 0 ? (
-              <button
-                onClick={() =>
-                  addToCart(
-                    product,
-                    addToast,
-                    quantityCount,
-                    selectedProductColor,
-                    selectedProductSize
-                  )
-                }
-                disabled={productCartQty >= productStock}
-              >
-                {" "}
-                Add To Cart{" "}
-              </button>
-            ) : (
-              <button disabled>Out of Stock</button>
-            )}
+            <button
+              onClick={() =>
+                addToCart(
+                  product,
+                  addToast,
+                  quantityCount,
+                  selectedProductColor,
+                  selectedProductSize
+                )
+              }
+              disabled={productCartQty >= productStock}
+            >
+              {" "}
+              Add To Cart{" "}
+            </button>
           </div>
           <div className="pro-details-wishlist">
             <button

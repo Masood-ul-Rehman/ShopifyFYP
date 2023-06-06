@@ -17,7 +17,7 @@ const ProductGridSingleTwo = ({
   sliderClassName,
   spaceBottomClass,
   colorClass,
-  titlePriceClass
+  titlePriceClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -30,7 +30,7 @@ const ProductGridSingleTwo = ({
 
   const handleOpenModal = () => {
     setModalShow(true);
-  }
+  };
 
   return (
     <Fragment>
@@ -45,7 +45,7 @@ const ProductGridSingleTwo = ({
           } ${colorClass ? colorClass : ""} `}
         >
           <div className="product-img">
-            <div onClick={handleOpenModal} style={{cursor: "pointer"}}>
+            <div onClick={handleOpenModal} style={{ cursor: "pointer" }}>
               <img
                 className="default-img"
                 src={`http://localhost:5000/images/${product?.image?.data}`}
@@ -92,7 +92,7 @@ const ProductGridSingleTwo = ({
                 >
                   <i className="fa fa-cog"></i>
                 </Link>
-              ) : product.stock && product.stock > 0 ? (
+              ) : (
                 <button
                   onClick={() => addToCart(product, addToast)}
                   className={
@@ -107,10 +107,6 @@ const ProductGridSingleTwo = ({
                 >
                   {" "}
                   <i className="fa fa-shopping-cart"></i>{" "}
-                </button>
-              ) : (
-                <button disabled className="active" title="Out of stock">
-                  <i className="fa fa-shopping-cart"></i>
                 </button>
               )}
 
@@ -138,9 +134,7 @@ const ProductGridSingleTwo = ({
                 titlePriceClass ? titlePriceClass : ""
               }`}
             >
-              <h4>
-                {product.title}
-              </h4>
+              <h4>{product.title}</h4>
               <div className="price-2">
                 {discountedPrice !== null ? (
                   <Fragment>
@@ -206,7 +200,7 @@ ProductGridSingleTwo.propTypes = {
   spaceBottomClass: PropTypes.string,
   colorClass: PropTypes.string,
   titlePriceClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingleTwo;

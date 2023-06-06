@@ -99,8 +99,8 @@ const Cart = ({
                                     <img
                                       className="img-fluid"
                                       src={
-                                        process.env.PUBLIC_URL +
-                                        cartItem.image[0]
+                                        "http://localhost:5000/images/ " +
+                                        cartItem?.image?.data
                                       }
                                       alt=""
                                     />
@@ -176,16 +176,6 @@ const Cart = ({
                                           addToast,
                                           quantityCount
                                         )
-                                      }
-                                      disabled={
-                                        cartItem !== undefined &&
-                                        cartItem.quantity &&
-                                        cartItem.quantity >=
-                                          cartItemStock(
-                                            cartItem,
-                                            cartItem.selectedProductColor,
-                                            cartItem.selectedProductSize
-                                          )
                                       }
                                     >
                                       +

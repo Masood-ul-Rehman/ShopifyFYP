@@ -6,8 +6,8 @@ const productSchema = mongoose.Schema(
       required: true,
       ref: "user",
     },
-    store: {
-      type: mongoose.Schema.Types.ObjectId,
+    store_id: {
+      type: String,
       required: true,
       ref: "storeDetails",
     },

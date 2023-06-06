@@ -27,12 +27,12 @@ const upload = multer({ storage: storage });
 
 const router = express.Router();
 
-router.post("/addProduct", upload.single("image"), protect, addProduct);
+router.post("/addProduct", protect, addProduct);
 router.post("/upload");
 router.put("/:id", updateProduct);
 router.delete("/:id", deleteProduct);
 router.get("/:id", getaProduct);
-router.get("/", getAllProduct);
+router.post("/", getAllProduct);
 router.put("/wishlist", protect, addToWishlist);
 router.put("/rating", protect, rating);
 

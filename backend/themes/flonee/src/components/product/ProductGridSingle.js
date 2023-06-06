@@ -16,7 +16,7 @@ const ProductGridSingle = ({
   wishlistItem,
   compareItem,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -96,7 +96,7 @@ const ProductGridSingle = ({
                   <Link to={`${process.env.PUBLIC_URL}/product/${product.id}`}>
                     Select Option
                   </Link>
-                ) : product.stock && product.stock > 0 ? (
+                ) : (
                   <button
                     onClick={() => addToCart(product, addToast)}
                     className={
@@ -109,15 +109,10 @@ const ProductGridSingle = ({
                       cartItem !== undefined ? "Added to cart" : "Add to cart"
                     }
                   >
-                    {" "}
                     <i className="pe-7s-cart"></i>{" "}
                     {cartItem !== undefined && cartItem.quantity > 0
                       ? "Added"
                       : "Add to cart"}
-                  </button>
-                ) : (
-                  <button disabled className="active">
-                    Out of Stock
                   </button>
                 )}
               </div>
@@ -187,7 +182,7 @@ ProductGridSingle.propTypes = {
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridSingle;

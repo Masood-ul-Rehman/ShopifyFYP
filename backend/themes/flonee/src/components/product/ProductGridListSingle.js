@@ -16,7 +16,7 @@ const ProductGridListSingle = ({
   wishlistItem,
   compareItem,
   sliderClassName,
-  spaceBottomClass
+  spaceBottomClass,
 }) => {
   const [modalShow, setModalShow] = useState(false);
   const { addToast } = useToasts();
@@ -29,7 +29,7 @@ const ProductGridListSingle = ({
 
   const handleOpenModal = () => {
     setModalShow(true);
-  }
+  };
 
   return (
     <Fragment>
@@ -41,23 +41,26 @@ const ProductGridListSingle = ({
         <div
           className={`product-wrap ${spaceBottomClass ? spaceBottomClass : ""}`}
         >
-          <div className="product-img"  onClick={handleOpenModal} style={{cursor: "pointer"}}>
-            
+          <div
+            className="product-img"
+            onClick={handleOpenModal}
+            style={{ cursor: "pointer" }}
+          >
+            <img
+              className="default-img"
+              src={`http://localhost:5000/images/${product?.image?.data}`}
+              alt=""
+            />
+            {product.image.data.split(" ").length > 1 ? (
               <img
-                className="default-img"
+                className="hover-img"
                 src={`http://localhost:5000/images/${product?.image?.data}`}
                 alt=""
               />
-              {product.image.data.split(" ").length > 1 ? (
-                <img
-                  className="hover-img"
-                  src={`http://localhost:5000/images/${product?.image?.data}`}
-                  alt=""
-                />
-              ) : (
-                ""
-              )}
-            
+            ) : (
+              ""
+            )}
+
             {product.discount || product.new ? (
               <div className="product-img-badges">
                 {product.discount ? (
@@ -100,7 +103,7 @@ const ProductGridListSingle = ({
                   <Link to={`${process.env.PUBLIC_URL}/product/${product._id}`}>
                     Select Option
                   </Link>
-                ) : product.stock && product.stock > 0 ? (
+                ) : (
                   <button
                     onClick={() => addToCart(product, addToast)}
                     className={
@@ -119,10 +122,6 @@ const ProductGridListSingle = ({
                       ? "Added"
                       : "Add to cart"}
                   </button>
-                ) : (
-                  <button disabled className="active">
-                    Out of Stock
-                  </button>
                 )}
               </div>
               <div className="pro-same-action pro-quickview">
@@ -134,7 +133,7 @@ const ProductGridListSingle = ({
           </div>
           <div className="product-content text-center">
             <h3>
-              <b onClick={handleOpenModal} style={{cursor: "pointer"}}>
+              <b onClick={handleOpenModal} style={{ cursor: "pointer" }}>
                 {product.title}
               </b>
             </h3>
@@ -163,23 +162,26 @@ const ProductGridListSingle = ({
           <div className="row" onClick={handleOpenModal}>
             <div className="col-xl-4 col-md-5 col-sm-6">
               <div className="product-list-image-wrap">
-                <div className="product-img" onClick={handleOpenModal} style={{cursor: "pointer"}}>
-                  
+                <div
+                  className="product-img"
+                  onClick={handleOpenModal}
+                  style={{ cursor: "pointer" }}
+                >
+                  <img
+                    className="default-img img-fluid"
+                    src={`http://localhost:5000/images/${product?.image?.data}`}
+                    alt=""
+                  />
+                  {product.image.data.split(" ").length > 1 ? (
                     <img
-                      className="default-img img-fluid"
-                      src={`http://localhost:5000/images/${product?.image?.data}`}
+                      className="hover-img img-fluid"
+                      src={`http://localhost:5000/images/${product?.image?.data[1]}`}
                       alt=""
                     />
-                    {product.image.data.split(" ").length > 1 ? (
-                      <img
-                        className="hover-img img-fluid"
-                        src={`http://localhost:5000/images/${product?.image?.data[1]}`}
-                        alt=""
-                      />
-                    ) : (
-                      ""
-                    )}
-                  
+                  ) : (
+                    ""
+                  )}
+
                   {product.discount || product.new ? (
                     <div className="product-img-badges">
                       {product.discount ? (
@@ -198,7 +200,7 @@ const ProductGridListSingle = ({
             <div className="col-xl-8 col-md-7 col-sm-6">
               <div className="shop-list-content">
                 <h3>
-                  <b onClick={handleOpenModal} style={{cursor: "pointer"}}>
+                  <b onClick={handleOpenModal} style={{ cursor: "pointer" }}>
                     {product.title}
                   </b>
                 </h3>
@@ -225,11 +227,7 @@ const ProductGridListSingle = ({
                 ) : (
                   ""
                 )}
-                {product.description ? (
-                  <p>{product.description}</p>
-                ) : (
-                  ""
-                )}
+                {product.description ? <p>{product.description}</p> : ""}
 
                 <div className="shop-list-actions d-flex align-items-center">
                   <div className="shop-list-btn btn-hover">
@@ -248,7 +246,7 @@ const ProductGridListSingle = ({
                       >
                         Select Option
                       </Link>
-                    ) : product.stock && product.stock > 0 ? (
+                    ) : (
                       <button
                         onClick={() => addToCart(product, addToast)}
                         className={
@@ -270,10 +268,6 @@ const ProductGridListSingle = ({
                         {cartItem !== undefined && cartItem.quantity > 0
                           ? "Added"
                           : "Add to cart"}
-                      </button>
-                    ) : (
-                      <button disabled className="active">
-                        Out of Stock
                       </button>
                     )}
                   </div>
@@ -343,7 +337,7 @@ ProductGridListSingle.propTypes = {
   product: PropTypes.object,
   sliderClassName: PropTypes.string,
   spaceBottomClass: PropTypes.string,
-  wishlistItem: PropTypes.object
+  wishlistItem: PropTypes.object,
 };
 
 export default ProductGridListSingle;

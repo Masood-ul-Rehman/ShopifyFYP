@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const NewOrder = require("../models/orderModal");
+const Product = require("../models/productModal");
 const createOrder = asyncHandler(async (req, res) => {
   try {
     const { User, productId, store_id, customerName, total } = req.body;
@@ -11,6 +12,18 @@ const createOrder = asyncHandler(async (req, res) => {
       customerName,
       total,
     });
+    await Promise.all(
+      productId.map(async (product) => {
+        const { _id, quantity } = product;
+        const updatedProduct = await Product.findByIdAndUpdate(
+          _id,
+          { $inc: { quantity: -quantity } }, // Decrement the quantity by the ordered quantity
+          { new: true }
+        );
+        console.log("Updated product:", updatedProduct);
+      })
+    );
+
     res.json(placeOrder);
   } catch (error) {
     console.error(error);
