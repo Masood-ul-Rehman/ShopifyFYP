@@ -95,7 +95,7 @@ const CheckoutInfo = () => {
   });
 
   const productIdArr = Array.from(productIdMap.values());
-
+  console.log(JSON.stringify(productIdArr) + "fron cart");
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -108,7 +108,6 @@ const CheckoutInfo = () => {
         customerName,
         store_id: storeInfo.store_id,
         productId: productIdArr,
-        quantity: cartItems.length,
         total: 1300,
       })
     );

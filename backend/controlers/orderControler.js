@@ -12,8 +12,11 @@ const createOrder = asyncHandler(async (req, res) => {
       customerName,
       total,
     });
+    console.log(productId);
     await Promise.all(
       productId.map(async (product) => {
+        console.log("product:", product); // Check the value of each product inside the map function
+
         const { _id, quantity } = product;
         const updatedProduct = await Product.findByIdAndUpdate(
           _id,

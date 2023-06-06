@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getStores, startStore } from "../../api/stores";
+import { getStores, startStore, stopServer } from "../../api/stores";
 import NoStore from "./noStorefound";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +25,9 @@ const Stores = ({ refetchState }) => {
   const startStoreQuery = useQuery(["startStore"], () => startStore(storeid), {
     enabled: false,
   });
+  const stopweb = useQuery(["stop"], () => stopServer(storeid), {
+    enabled: false,
+  });
   useEffect(() => {
     GetStores();
   }, [refetchState]);
@@ -45,12 +48,15 @@ const Stores = ({ refetchState }) => {
   const handleStartStore = (id) => {
     // console.log(storeId);
     setStoreId(id);
+    window.open("http://localhost:3010/", "_blank");
     // startStoreQuery.refetch();
     // if(storeid !== undefined){
     //   startStoreQuery.refetch();
     // }
   };
-
+  const stop = () => {
+    stopweb.refetch();
+  };
   useEffect(() => {
     if (storeid !== undefined) {
       startStoreQuery.refetch();
@@ -90,13 +96,18 @@ const Stores = ({ refetchState }) => {
                       <div className="btns flex flex-col mt-8">
                         <button
                           className="p-2 rounded-lg bg-green-600 font-poppins text-base text-white"
-                          onClick={() => handleStartStore(storeData._id)}
+                          onClick={() => handleStartStore(storeData.store_id)}
                         >
                           View website
                         </button>
-                        <button className="p-2 rounded-lg bg-red font-poppins text-base mt-3 text-white">
+                        {/* <button
+                          onClick={() => {
+                            stop();
+                          }}
+                          className="p-2 rounded-lg bg-red font-poppins text-base mt-3 text-white"
+                        >
                           stop website
-                        </button>
+                        </button> */}
                         <button
                           className="p-2 rounded-lg bg-gray-800 font-poppins text-base mt-3 text-white"
                           onClick={() => {

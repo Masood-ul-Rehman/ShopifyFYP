@@ -3,6 +3,7 @@ import StatsGrid from "./StatsGrid";
 import BuyerProfileChart from "./BuyerProfileChart";
 import TransactionChart from "./TransactionChart";
 import Order from "./Order";
+import Stores from "../store/stores";
 
 function Dashborad() {
   return (

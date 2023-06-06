@@ -43,6 +43,10 @@ export const startStore = async (id) => {
     throw error;
   }
 };
+export const stopServer = async () => {
+  const resp = await axiosInstance.get(`${API_URL}/api/stores/stop`);
+  return resp;
+};
 export const getOrders = async (id) => {
   try {
     const response = await axiosInstance.get(

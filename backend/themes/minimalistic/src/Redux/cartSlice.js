@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import axiosInstance from "../axios";
+import axiosForm from "../axiosFormhelper";
 
 export const addToCart = createAsyncThunk("cart/add", async (id) => {
   // const { data } = await axios.post(`/cart`, { product_id: id });
@@ -56,7 +57,7 @@ export const decrementCartItem = createAsyncThunk(
 
 export const checkout = createAsyncThunk("cart/checkout", async (formData) => {
   const { User, productId, store_id, customerName, total } = formData;
-  const { data } = await axiosInstance.post(
+  const { data } = await axiosForm.post(
     "http://localhost:5000/api/order/placeOrder",
     {
       User,

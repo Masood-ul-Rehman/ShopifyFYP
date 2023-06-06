@@ -64,21 +64,21 @@ const SingleProduct = () => {
   console.log(filteredItem);
   const handleClick = () => {
     dispatch(addToCart(filteredItem));
-    if (!error && !pending) {
-      dispatch(
-        openSnackBar({
-          severity: "success",
-          text: "Item has been added to cart",
-        })
-      );
-    } else if (error && !pending) {
-      dispatch(
-        openSnackBar({
-          severity: "error",
-          text: "Something went wrong",
-        })
-      );
-    }
+    // if (!error && !pending) {
+    dispatch(
+      openSnackBar({
+        severity: "success",
+        text: "Item has been added to cart",
+      })
+    );
+    //   } else if (error && !pending) {
+    //     dispatch(
+    //       openSnackBar({
+    //         severity: "error",
+    //         text: "Something went wrong",
+    //       })
+    //     );
+    //   }
   };
 
   return (
