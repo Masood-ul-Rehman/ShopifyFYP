@@ -65,7 +65,7 @@ function Products() {
           {isLoading ? (
             <h1 className="font-poppins font-medium text-3xl">Loading....</h1>
           ) : (
-            data?.data.map((detail) => {
+            data?.data?.map((detail) => {
               return (
                 <div
                   key={detail._id}

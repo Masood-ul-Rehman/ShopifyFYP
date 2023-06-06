@@ -36,8 +36,8 @@ function Updateprod({ detail }) {
     const file = event.target.files[0];
     // creates a URL for the selected file object
     // represents the file contents as a binary string
-
-    setSelectedImage(URL.createObjectURL(file));
+    setSelectedImage(file);
+    formData.image = selectedImage;
   };
 
   const onChange = (e) => {
@@ -49,7 +49,11 @@ function Updateprod({ detail }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    update.mutate({ user, id, formData });
+    update.mutate({
+      user,
+      id,
+      formData,
+    });
   };
 
   return (
@@ -144,7 +148,26 @@ function Updateprod({ detail }) {
               </div>
             </div>
 
-            {/* <div className="mt-16 relative">
+            <div className="mt-6">
+              <label
+                htmlFor="details"
+                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
+              >
+                Full Description
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                value={description}
+                onChange={onChange}
+                placeholder="Products details..."
+                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
+                rows="4"
+              >
+                Enter product details here...
+              </textarea>
+            </div>
+            <div className="mt-16 relative">
               <label className="flex flex-col items-center w-full px-4 py-6 rounded-md bg-white border border-neutral-800 shadow-md tracking-wide cursor-pointer focus:shadow-oline-neutral-800 transition duration-150 ease-in-out">
                 <span className="text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800 absolute left-0 -top-[36px]">
                   Product image
@@ -181,27 +204,7 @@ function Updateprod({ detail }) {
                   onChange={handleImageChange}
                 />
               </label>
-            </div> */}
-            <div className="mt-6">
-              <label
-                htmlFor="details"
-                className="block text-base md:text-lg font-medium font-poppins leading-5 mb-2 ml-[2px] text-neutral-800"
-              >
-                Full Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={description}
-                onChange={onChange}
-                placeholder="Products details..."
-                className="form-input font-poppins text-neutral-800 text-base md:text-lg block py-3 px-4 border border-neutral-800 rounded-md shadow-sm focus:outline-none focus:shadow-oline-purplish focus:border-neutral-800 transition duration-150 ease-in-out sm:text-sm sm:leading-5 w-full"
-                rows="4"
-              >
-                Enter product details here...
-              </textarea>
             </div>
-
             <Button type="submit" semiRounded simpleBlack styles="mt-10">
               Update
             </Button>
