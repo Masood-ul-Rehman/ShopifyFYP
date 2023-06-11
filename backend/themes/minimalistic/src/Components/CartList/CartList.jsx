@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import CartItem from "../CartItem/CartItem";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -115,12 +115,22 @@ const CartList = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
    const isMounted = useRef(false);
+   const [totalPrice, setTotalPrice] = useState(0);
 
    useEffect(() => {
       if (cartItems.length !== 0) {
          dispatch(getTotal());
       }
    }, [dispatch, cartItems, cartItems.length]);
+
+   useEffect(() => {
+      // Calculate the total price
+      let totalPrice = 0;
+      cartItems.forEach((item) => {
+        totalPrice += item.price ;
+      });
+      setTotalPrice(totalPrice);
+    }, [cartItems]);
 
    // const handleClearCart = () => {
    //    dispatch(clearCart());
@@ -165,7 +175,7 @@ const CartList = () => {
                   className={classes.priceDiv}
                >
                   <Typography variant="body1" color="initial">
-                     Total: {cartItems.length}
+                     Total: {totalPrice}
                   </Typography>
                </Grid>
                <Grid

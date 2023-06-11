@@ -54,8 +54,8 @@ const SingleProduct = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { items } = useSelector((state) => state.app);
-  const { pending, error } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user.user);
+  const {error, pending } = useSelector((state) => state.cartItems);
 
   const { id } = useParams();
 
