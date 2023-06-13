@@ -39,8 +39,12 @@ function AddProduct() {
     e.preventDefault();
 
     if (selectedImage) {
-      setFormData({ ...formData, image: selectedImage });
+      setFormData((prevState) => ({
+        ...prevState,
+        image: selectedImage,
+      }));
       dispatch(AddProductThnuk(formData));
+      
     }
   };
 
