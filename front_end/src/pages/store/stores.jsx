@@ -133,10 +133,10 @@ const Stores = ({ refetchState }) => {
             </div>
           </div>
         ) : (
-          <h1>Loading...</h1>
-        )
-      ) : (
-        <NoStore />
+          <NoStore />
+          )
+          ) : (
+        <h1>Loading...</h1>
       )}
     </>
   );

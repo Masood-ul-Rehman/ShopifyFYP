@@ -30,6 +30,7 @@ function App() {
         <div className="main-content">
           {!user && <Header />}
           <Routes>
+            {!user && <Route path="/" element={<Home />} />}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Routes>
@@ -56,7 +57,7 @@ function App() {
              > */}
             </Routes>
           )}
-          {!user && <Home />}
+          {/* {!user && <Home />} */}
 
           {!user && <Footer />}
         </div>
