@@ -6,9 +6,9 @@ export const API_URL = "http://localhost:5000";
 const User = localStorage.getItem("user");
 const user = User?.slice(1);
 export const fuser = user?.slice(0, -1);
-// const store_id = localStorage.getItem("store");
+const store_id = localStorage.getItem("store");
 
-export const getProducts = async (store_id) => {
+export const getProducts = async () => {
   try {
     const response = axiosInstance.post(`${API_URL}/api/product`, {
       store_id,

@@ -11,7 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 function Products() {
   const { isLoading, isSuccess, isError, data, error, refetch } = useQuery({
     queryKey: ["getProducts"],
-    queryFn:() => getProducts(id),
+    queryFn: getProducts,
   });
   const navigate = useNavigate();
   const { id } = useParams();

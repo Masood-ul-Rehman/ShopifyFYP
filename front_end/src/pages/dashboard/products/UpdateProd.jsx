@@ -9,11 +9,13 @@ function Updateprod({ detail }) {
   const data = useLocation();
   const id = data?.state?._id;
   const user = data?.state?.User;
-  console.log(data, "this is the id of the product");
+  const storeId = data?.state?.store_id
 
   const update = useMutation(({ user, id, formData }) => {
     return updateProduct({ user, id, formData });
   });
+
+
 
   //this data will be obtained from the store using redux
   const [formData, setFormData] = useState({
@@ -26,7 +28,7 @@ function Updateprod({ detail }) {
     color: data?.state?.color,
     image: data?.state?.image,
   });
-  console.log(detail, "these are the details");
+  
   const { title, shortdesc, price, color, description, slug, image, quantity } =
     formData;
 
@@ -64,7 +66,7 @@ function Updateprod({ detail }) {
             <h1 className="font-poppins font-medium text-6xl">
               Update product
             </h1>
-            <Link to="/dashboard/products">
+            <Link to={`/dashboard/${storeId}/products`}>
               <Button semiRounded simpleBlack>
                 Back to products
               </Button>
