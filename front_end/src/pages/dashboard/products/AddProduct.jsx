@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
@@ -29,15 +29,6 @@ function AddProduct() {
     console.log(event.target.files[0] + "imgf");
   };
 
-  useEffect(() => {
-    if (selectedImage) {
-      setFormData((prevState) => ({
-        ...prevState,
-        image: selectedImage,
-      }));
-    }
-  }, [selectedImage]);
-
   const onChange = (e) => {
     setFormData((prevState) => ({
       ...prevState,
@@ -47,14 +38,10 @@ function AddProduct() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // if (selectedImage) {
-    //   setFormData((prevState) => ({
-    //     ...prevState,
-    //     image: selectedImage,
-    //   }));
-    
-    // }
+    if (selectedImage) {
+      setFormData({ ...formData, image: selectedImage });
       dispatch(AddProductThnuk(formData));
+    }
   };
 
   return (
