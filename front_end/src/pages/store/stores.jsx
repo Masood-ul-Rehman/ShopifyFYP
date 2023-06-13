@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { useQuery } from "@tanstack/react-query";
 import { getStores, startStore, stopServer } from "../../api/stores";
 import NoStore from "./noStorefound";
@@ -10,13 +11,21 @@ const Stores = ({ refetchState }) => {
   const navigate = useNavigate();
   const [storeid, setStoreId] = useState();
 
+  const userId = useSelector((state) => {
+    return state.auth.user
+  })
+
+  const user = useSelector((state) => {
+    return state.auth.user._id
+  })
+
   const {
     data,
     isLoading,
     refetch: GetStores,
   } = useQuery({
     queryKey: ["getStores"],
-    queryFn: getStores,
+    queryFn: () => getStores(typeof userId === "object" ? user : userId ),
   });
 
   // if (storeid !== null || storeid !== null || storeid !== " "){

@@ -3,10 +3,12 @@ import "react-toastify/dist/ReactToastify.css";
 import { toast } from "react-toastify";
 import { fuser, API_URL } from "./product";
 console.log(fuser);
-export const getStores = async () => {
+export const getStores = async (userId) => {
+
+  console.log(userId, "userId from stores");
   try {
     const response = await axiosInstance.get(
-      `${API_URL}/api/stores/getStores/${fuser}`
+      `${API_URL}/api/stores/getStores/${userId}`
     );
     return response;
   } catch (error) {
