@@ -5,7 +5,6 @@ import { fuser, API_URL } from "./product";
 console.log(fuser);
 export const getStores = async (userId) => {
 
-  console.log(userId, "userId from stores");
   try {
     const response = await axiosInstance.get(
       `${API_URL}/api/stores/getStores/${userId}`
