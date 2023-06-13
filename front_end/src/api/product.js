@@ -3,6 +3,7 @@ import "react-toastify/dist/ReactToastify.css";
 import axiosForm from "../store/axiosFormhelper";
 import { ToastContainer, toast } from "react-toastify";
 export const API_URL = "http://localhost:5000";
+const PRODUCT_BASE_URL = "https://backend-production-0593.up.railway.app"
 const User = localStorage.getItem("user");
 const user = User?.slice(1);
 export const fuser = user?.slice(0, -1);
@@ -10,7 +11,7 @@ const store_id = localStorage.getItem("store");
 
 export const getProducts = async () => {
   try {
-    const response = axiosInstance.post(`${API_URL}/api/product`, {
+    const response = axiosInstance.post(`${PRODUCT_BASE_URL}/api/product`, {
       store_id,
     });
     return response;
