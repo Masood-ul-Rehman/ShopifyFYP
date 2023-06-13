@@ -38,17 +38,22 @@ export const getProductsInCategories = createAsyncThunk(
 const store_id = sdata.store_id;
 
 export const getItems = createAsyncThunk("products/fetch", async () => {
-  const response = await axiosForm.post("http://localhost:5000/api/product", {
+  const response = await axiosForm.post("https://backend-production-0593.up.railway.app/api/product", {
     store_id: store_id,
   });
   return response.data;
 });
 
+// export const getItems = createAsyncThunk("products/fetch", async () => {
+//   const response = await axiosForm.get(`https://backend-production-0593.up.railway.app/api/product/${store_id}`);
+//   return response.data;
+// });
+
 export const getSingleItem = createAsyncThunk(
   "products/getSingleItem",
   async (id) => {
     const response = await axiosInstance.get(
-      `http://localhost:5000/api/product/${id}`
+      `https://backend-production-0593.up.railway.app/api/product/${id}`
     );
 
     return response.data;
