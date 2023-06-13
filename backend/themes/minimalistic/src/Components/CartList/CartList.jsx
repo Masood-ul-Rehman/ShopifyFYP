@@ -11,7 +11,7 @@ import {
    withStyles,
 } from "@material-ui/core";
 import classNames from "classnames";
-import { clearCart } from "../../Redux/cartSlice";
+import { clearCart } from "../../Redux/addToCart";
 import { openSnackBar } from "../../Redux/appSlice";
 import { getTotal } from "../../Redux/cartSlice";
 
@@ -132,24 +132,9 @@ const CartList = () => {
       setTotalPrice(totalPrice);
     }, [cartItems]);
 
-   // const handleClearCart = () => {
-   //    dispatch(clearCart());
-   //    if (!error && !pending) {
-   //       dispatch(
-   //          openSnackBar({
-   //             severity: "success",
-   //             text: "Cart has been cleared",
-   //          })
-   //       );
-   //    } else if (error && !pending) {
-   //       dispatch(
-   //          openSnackBar({
-   //             severity: "error",
-   //             text: "Something went wrong",
-   //          })
-   //       );
-   //    }
-   // };
+   const handleClearCart = () => {
+      dispatch(clearCart());
+   };
 
    return (
       <>
@@ -186,7 +171,7 @@ const CartList = () => {
                >
                   <DangerButton
                      variant="contained"
-                     // onClick={handleClearCart}
+                     onClick={handleClearCart}
                      className={classes.marginRightTwo}
                   >
                      Clear Cart

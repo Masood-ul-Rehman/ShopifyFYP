@@ -8,6 +8,7 @@ import {
   incrementCartItem,
   decrementCartItem,
 } from "../../Redux/cartSlice";
+import { decrementCart, incrementCart, addToCart, clearParticular } from "../../Redux/addToCart"
 import { openSnackBar } from "../../Redux/appSlice";
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -78,20 +79,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CartItem = ({ item }) => {
-  const classes = useStyles();
-  // const { error, pending } = useSelector((state) => state.cart);
-  // const {
-  //    quantity,
-  //    product_id: { _id, image, price, title },
-  // } = item;
+  
 
-  // const { _id, title, description, price } = item
+  const classes = useStyles();
   const dispatch = useDispatch();
 
-  //   const handleDelete = () => {
-  //     dispatch(removeItemFromCart(_id));
-
-  //   };
+    const handleDelete = () => {
+      dispatch(clearParticular(item._id));
+    };
   return (
     <Grid
       container
@@ -117,7 +112,7 @@ const CartItem = ({ item }) => {
           <div className={classes.imgContainer}>
             <img
               className={classes.img}
-              src={`http://localhost:5000/images/${item?.image.data}`}
+              src={`http://localhost:5000/images/${item?.image?.data}`}
               alt={item?.title}
             />
           </div>
@@ -135,7 +130,7 @@ const CartItem = ({ item }) => {
               {item?.title}
             </Typography>
             <Delete
-              // onClick={handleDelete}
+              onClick={handleDelete}
               className={classNames(classes.dangerText, classes.cursor)}
             />
           </Grid>
@@ -176,13 +171,13 @@ const CartItem = ({ item }) => {
               xs={4}
             >
               <IconButton
-                onClick={() => dispatch(decrementCartItem(item?._id))}
+                onClick={() => dispatch(decrementCart(item?._id))}
               >
                 <Remove className={classes.paleText} />
               </IconButton>
               <Typography variant="subtitle2">{item?.quantity}</Typography>
               <IconButton
-                onClick={() => dispatch(incrementCartItem(item?._id))}
+                onClick={() => dispatch(incrementCart(item?._id))}
               >
                 <Add className={classes.paleText} />
               </IconButton>
