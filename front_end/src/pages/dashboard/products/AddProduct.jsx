@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../../components/Button";
@@ -40,9 +40,15 @@ function AddProduct() {
 
     if (selectedImage) {
       setFormData({ ...formData, image: selectedImage });
-      dispatch(AddProductThnuk(formData));
     }
   };
+
+  useEffect(() => {
+    if(formData.image){
+      dispatch(AddProductThnuk(formData));
+      navigate(`/dashboard/${id}/products`);
+    }
+  }, [handleSubmit])
 
   return (
     <div className="py-4">
@@ -54,7 +60,7 @@ function AddProduct() {
               navigate(`/dashboard/${id}`);
             }}
           ></div>
-          <Button semiRounded simpleBlack>
+          <Button semiRounded simpleBlack onClick={`/dashboard/${id}/products`}>
             Back to products
           </Button>
         </div>

@@ -19,14 +19,31 @@ const Stores = ({ refetchState }) => {
     return state.auth.user._id
   })
 
+  // const {
+  //   data,
+  //   isLoading,
+  //   isError,
+  //   refetch: GetStores,
+  // } = useQuery({
+  //   queryKey: ["getStores"],
+  //   queryFn: () => getStores(typeof userId === "object" ? user : userId ),
+  // });
+
   const {
-    data,
-    isLoading,
-    refetch: GetStores,
-  } = useQuery({
-    queryKey: ["getStores"],
-    queryFn: () => getStores(typeof userId === "object" ? user : userId ),
-  });
+    data, isLoading, refetch: GetStores, isError
+  } = useQuery(['getStores'], () => getStores(typeof userId === "object" ? user : userId), {
+    onSuccess: (data) => {
+      return data
+    },
+    onError: (err) => {
+      if (err.response && err.response.status === 401){
+        navigate('/create')
+      }
+    },
+    retry: 0,
+  })
+
+  console.log(isError, "this is the response....")
 
   // if (storeid !== null || storeid !== null || storeid !== " "){
   //   const startStoreQuery = useQuery("startStore", startStore(storeid), enabled: false);
@@ -58,10 +75,10 @@ const Stores = ({ refetchState }) => {
     // console.log(storeId);
     setStoreId(id);
     window.open("http://localhost:3010/", "_blank");
-    // startStoreQuery.refetch();
-    // if(storeid !== undefined){
-    //   startStoreQuery.refetch();
-    // }
+    startStoreQuery.refetch();
+    if(storeid !== undefined){
+      startStoreQuery.refetch();
+    }
   };
   const stop = () => {
     stopweb.refetch();

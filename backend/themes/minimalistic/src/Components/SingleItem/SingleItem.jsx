@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 const SingleItem = ({ item }) => {
    const classes = useStyles();
    const { _id, title, image, price } = item;
+   console.log(item, "these are the item.")
    const navigate = useNavigate();
    return (
       <Grid item xs={10} sm={6} lg={3}>
@@ -35,7 +36,7 @@ const SingleItem = ({ item }) => {
             <CardActionArea onClick={() => navigate(`/products/${_id}`)}>
                <CardMedia
                   className={classes.media}
-                  src={`http://localhost:5000/images/${item.image.data}`}
+                  src={`http://localhost:5000/images/${item?.image?.data}`}
                   title={title}
                   component="img"
                   loading="lazy"

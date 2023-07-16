@@ -24,7 +24,7 @@ const addnewProduct = async (data) => {
     });
     return response.data;
   } catch (error) {
-    toast.error("error in adding the product", {
+    toast.error("please fill all the info", {
       position: toast.POSITION.TOP_RIGHT,
     });
     throw error;
